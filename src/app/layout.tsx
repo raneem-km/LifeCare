@@ -1,0 +1,38 @@
+import type { Metadata } from "next";
+import { Inter, Geist } from "next/font/google";
+import "./globals.css";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+
+
+// Initialize the Next.js optimized font
+const inter = Inter({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: "CityHealth Clinic | Compassionate Local Healthcare",
+  description: "Experience personalized medical care at CityHealth Clinic.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className={cn("scroll-smooth", "font-sans", geist.variable)}>
+      <head>
+        {/* We keep Material Symbols as a standard link because it is an icon font, not a standard text font */}
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+      </head>
+      {/* We apply the optimized Inter font directly to the body */}
+      <body className={`${inter.className} bg-background text-on-surface antialiased`}>
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
