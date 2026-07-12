@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import BookingForm from "@/components/BookingForm";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import ServicesSection from "@/components/ServicesSection";
 import { getReviews } from "@/app/actions";
 import { Button } from "@/components/ui/button";
 import {
@@ -69,78 +70,7 @@ export default async function Home() {
       </section>
 
       {/* Services Section */}
-      <section className="py-2xl bg-surface-bright" id="services">
-        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
-          <div className="text-center mb-xl">
-            <h2 className="text-headline-md font-bold text-primary mb-4">Our Clinic Services</h2>
-            <p className="text-on-surface-variant max-w-4xl mx-auto">
-              Comprehensive healthcare solutions tailored for your everyday needs.<br className="hidden lg:block"/> From routine checkups to minor procedures.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
-              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">medical_services</span>
-              </div>
-              <h3 className="text-headline-sm font-bold text-primary mb-3">General Consultation</h3>
-              <p className="text-on-surface-variant mb-6 flex-grow">Expert primary care for fevers, infections, and common illnesses for patients of all ages.</p>
-              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
-                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </Link>
-            </div>
-            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
-              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">health_and_safety</span>
-              </div>
-              <h3 className="text-headline-sm font-bold text-primary mb-3">Preventative Care</h3>
-              <p className="text-on-surface-variant mb-6 flex-grow">Routine health checkups, blood pressure monitoring, and wellness plans to keep you healthy.</p>
-              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
-                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </Link>
-            </div>
-            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
-              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">vaccines</span>
-              </div>
-              <h3 className="text-headline-sm font-bold text-primary mb-3">Vaccinations</h3>
-              <p className="text-on-surface-variant mb-6 flex-grow">Standard immunizations for children and adults, including flu shots and travel vaccines.</p>
-              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
-                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </Link>
-            </div>
-            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
-              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">science</span>
-              </div>
-              <h3 className="text-headline-sm font-bold text-primary mb-3">Diagnostic Lab Tests</h3>
-              <p className="text-on-surface-variant mb-6 flex-grow">On-site sample collection for blood work, sugar levels, and other essential diagnostic tests.</p>
-              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
-                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </Link>
-            </div>
-            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
-              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">child_care</span>
-              </div>
-              <h3 className="text-headline-sm font-bold text-primary mb-3">Pediatrics</h3>
-              <p className="text-on-surface-variant mb-6 flex-grow">Gentle and specialized medical care for infants, children, and adolescents in a warm environment.</p>
-              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
-                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </Link>
-            </div>
-            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
-              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">healing</span>
-              </div>
-              <h3 className="text-headline-sm font-bold text-primary mb-3">Minor Procedures</h3>
-              <p className="text-on-surface-variant mb-6 flex-grow">Wound care, minor suturing, dressing changes, and other in-clinic outpatient procedures.</p>
-              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
-                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ServicesSection />
 
       {/* Why Choose Us */}
       <section className="py-2xl bg-surface-container-low" id="about">
@@ -300,18 +230,18 @@ export default async function Home() {
               <h2 className="text-headline-md font-bold text-primary mb-6">Schedule Your Visit</h2>
               <p className="text-on-surface-variant mb-8">Take the first step towards better health. Fill out the form or call our clinic desk directly to book an appointment.</p>
               <div className="flex flex-col gap-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+                <a href="tel:+918040002546" className="flex items-center gap-4 group/item hover:opacity-85 transition-all w-fit">
+                  <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center group-hover/item:bg-secondary/20 transition-colors">
                     <span className="material-symbols-outlined text-secondary">call</span>
                   </div>
-                  <span className="font-bold text-primary">+91 (80) 4000-CLINIC</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
+                  <span className="font-bold text-primary hover:text-secondary transition-colors">+91 (80) 4000-CLINIC</span>
+                </a>
+                <a href="mailto:hello@cityhealthclinic.in" className="flex items-center gap-4 group/item hover:opacity-85 transition-all w-fit">
+                  <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center group-hover/item:bg-secondary/20 transition-colors">
                     <span className="material-symbols-outlined text-secondary">mail</span>
                   </div>
-                  <span className="font-bold text-primary">hello@cityhealthclinic.in</span>
-                </div>
+                  <span className="font-bold text-primary hover:text-secondary transition-colors">hello@cityhealthclinic.in</span>
+                </a>
               </div>
             </div>
             <div className="w-full md:w-1/2">
