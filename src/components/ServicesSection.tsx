@@ -165,7 +165,7 @@ export default function ServicesSection() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-300">
           {/* Modal Container */}
           <div 
-            className="bg-white text-slate-900 rounded-[2.5rem] shadow-2xl border border-slate-100 max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8 md:p-10 relative animate-in zoom-in-95 duration-300"
+            className="bg-white text-slate-900 rounded-3xl md:rounded-[2.5rem] shadow-2xl border border-slate-100 max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6 md:p-10 relative animate-in zoom-in-95 duration-300"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}

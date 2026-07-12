@@ -17,20 +17,20 @@ export default async function Home() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-[870px] flex items-center overflow-hidden">
+      <section className="relative min-h-[600px] md:min-h-[870px] flex items-center overflow-hidden">
         {/* Background Hospital Image */}
         <div className="absolute inset-0 z-0">
-          <Image 
-            src="/images/clinic-building.jpg" 
-            alt="CityHealth Clinic Building" 
-            fill 
-            className="object-cover object-center" 
+          <Image
+            src="/images/clinic-building.jpg"
+            alt="CityHealth Clinic Building"
+            fill
+            className="object-cover object-center"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-surface via-surface/95 to-surface/20"></div>
+          <div className="absolute inset-0 bg-surface/90 md:bg-gradient-to-r md:from-surface md:via-surface/95 md:to-surface/20"></div>
         </div>
 
-        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-md items-center py-xl relative z-10">
+        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-md items-center py-12 md:py-xl relative z-10">
           <div className="space-y-sm md:col-span-8 pr-0 lg:pr-8">
             <span className="inline-block px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-label-md font-bold uppercase tracking-wider backdrop-blur-md">
               Your Trusted Local Clinic
@@ -39,7 +39,7 @@ export default async function Home() {
               Compassionate Care, <span className="text-secondary">Centered Around You</span>
             </h1>
             <p className="text-on-surface-variant text-body-lg max-w-3xl">
-              Experience personalized medical care at CityHealth Clinic. Our dedicated team of primary care<br className="hidden lg:block"/> physicians is here to support your everyday health and well-being in a friendly, comfortable environment.
+              Experience personalized medical care at CityHealth Clinic. Our dedicated team of primary care<br className="hidden lg:block" /> physicians is here to support your everyday health and well-being in a friendly, comfortable environment.
             </p>
             <div className="flex flex-wrap gap-md pt-sm items-center">
               <Link
@@ -70,12 +70,83 @@ export default async function Home() {
       </section>
 
       {/* Services Section */}
-      <ServicesSection />
+      <section className="py-2xl bg-surface-bright" id="services">
+        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
+          <div className="text-center mb-xl">
+            <h2 className="text-headline-md font-bold text-primary mb-4">Our Clinic Services</h2>
+            <p className="text-on-surface-variant max-w-4xl mx-auto">
+              Comprehensive healthcare solutions tailored for your everyday needs.<br className="hidden lg:block" /> From routine checkups to minor procedures.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
+              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">medical_services</span>
+              </div>
+              <h3 className="text-headline-sm font-bold text-primary mb-3">General Consultation</h3>
+              <p className="text-on-surface-variant mb-6 flex-grow">Expert primary care for fevers, infections, and common illnesses for patients of all ages.</p>
+              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
+                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </Link>
+            </div>
+            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
+              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">health_and_safety</span>
+              </div>
+              <h3 className="text-headline-sm font-bold text-primary mb-3">Preventative Care</h3>
+              <p className="text-on-surface-variant mb-6 flex-grow">Routine health checkups, blood pressure monitoring, and wellness plans to keep you healthy.</p>
+              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
+                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </Link>
+            </div>
+            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
+              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">vaccines</span>
+              </div>
+              <h3 className="text-headline-sm font-bold text-primary mb-3">Vaccinations</h3>
+              <p className="text-on-surface-variant mb-6 flex-grow">Standard immunizations for children and adults, including flu shots and travel vaccines.</p>
+              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
+                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </Link>
+            </div>
+            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
+              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">science</span>
+              </div>
+              <h3 className="text-headline-sm font-bold text-primary mb-3">Diagnostic Lab Tests</h3>
+              <p className="text-on-surface-variant mb-6 flex-grow">On-site sample collection for blood work, sugar levels, and other essential diagnostic tests.</p>
+              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
+                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </Link>
+            </div>
+            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
+              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">child_care</span>
+              </div>
+              <h3 className="text-headline-sm font-bold text-primary mb-3">Pediatrics</h3>
+              <p className="text-on-surface-variant mb-6 flex-grow">Gentle and specialized medical care for infants, children, and adolescents in a warm environment.</p>
+              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
+                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </Link>
+            </div>
+            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
+              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
+                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">healing</span>
+              </div>
+              <h3 className="text-headline-sm font-bold text-primary mb-3">Minor Procedures</h3>
+              <p className="text-on-surface-variant mb-6 flex-grow">Wound care, minor suturing, dressing changes, and other in-clinic outpatient procedures.</p>
+              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
+                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Why Choose Us */}
-      <section className="py-2xl bg-surface-container-low" id="about">
+      <section className="py-12 md:py-2xl bg-surface-container-low" id="about">
         <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-xl items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-xl items-center">
             <div className="lg:col-span-7">
               <h2 className="text-headline-md font-bold text-primary mb-6">Why Choose CityHealth?</h2>
               <p className="text-on-surface-variant text-body-lg mb-10">We believe healthcare should be accessible, personal, and stress-free. Our clinic is designed to put you at ease while providing top-notch medical attention.</p>
@@ -123,7 +194,7 @@ export default async function Home() {
       </section>
 
       {/* Meet Our Doctors */}
-      <section className="py-2xl bg-surface-bright" id="doctors">
+      <section className="py-12 md:py-2xl bg-surface-bright" id="doctors">
         <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="flex flex-col md:flex-row justify-between items-end mb-xl gap-md">
             <div className="max-w-xl">
@@ -190,7 +261,7 @@ export default async function Home() {
       <TestimonialsSection initialDbReviews={dbReviews} />
 
       {/* FAQ Section */}
-      <section className="py-2xl bg-surface-bright">
+      <section className="py-12 md:py-2xl bg-surface-bright">
         <div className="max-w-3xl mx-auto px-margin-mobile md:px-0">
           <h2 className="text-headline-md font-bold text-primary text-center mb-xl">Frequently Asked Questions</h2>
           <Accordion defaultValue={[]} className="w-full space-y-4">
@@ -223,25 +294,25 @@ export default async function Home() {
       </section>
 
       {/* Appointment Booking */}
-      <section className="py-2xl relative overflow-hidden" id="booking">
+      <section className="py-12 md:py-2xl relative overflow-hidden" id="booking">
         <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="bg-surface-container p-8 md:p-16 rounded-3xl shadow-xl flex flex-col md:flex-row items-center gap-xl relative z-10 border border-surface-variant/20">
             <div className="w-full md:w-1/2">
               <h2 className="text-headline-md font-bold text-primary mb-6">Schedule Your Visit</h2>
               <p className="text-on-surface-variant mb-8">Take the first step towards better health. Fill out the form or call our clinic desk directly to book an appointment.</p>
               <div className="flex flex-col gap-4">
-                <a href="tel:+918040002546" className="flex items-center gap-4 group/item hover:opacity-85 transition-all w-fit">
-                  <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center group-hover/item:bg-secondary/20 transition-colors">
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
                     <span className="material-symbols-outlined text-secondary">call</span>
                   </div>
-                  <span className="font-bold text-primary hover:text-secondary transition-colors">+91 (80) 4000-CLINIC</span>
-                </a>
-                <a href="mailto:hello@cityhealthclinic.in" className="flex items-center gap-4 group/item hover:opacity-85 transition-all w-fit">
-                  <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center group-hover/item:bg-secondary/20 transition-colors">
+                  <span className="font-bold text-primary">+91 (80) 4000-CLINIC</span>
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
                     <span className="material-symbols-outlined text-secondary">mail</span>
                   </div>
-                  <span className="font-bold text-primary hover:text-secondary transition-colors">hello@cityhealthclinic.in</span>
-                </a>
+                  <span className="font-bold text-primary">hello@cityhealthclinic.in</span>
+                </div>
               </div>
             </div>
             <div className="w-full md:w-1/2">
@@ -253,7 +324,7 @@ export default async function Home() {
       </section>
 
       {/* Map & Contact */}
-      <section className="py-2xl bg-surface-bright" id="contact">
+      <section className="py-12 md:py-2xl bg-surface-bright" id="contact">
         <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter items-stretch">
             <div className="rounded-3xl overflow-hidden h-[450px] shadow-soft border border-surface-variant/30 relative">
@@ -276,7 +347,7 @@ export default async function Home() {
                   </div>
                   <div>
                     <h4 className="font-bold text-primary text-body-lg">Clinic Address</h4>
-                    <p className="text-on-surface-variant">Shop No. 12, High Street<br/>Indiranagar, Bengaluru 560038</p>
+                    <p className="text-on-surface-variant">Shop No. 12, High Street<br />Indiranagar, Bengaluru 560038</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-5">
@@ -285,7 +356,7 @@ export default async function Home() {
                   </div>
                   <div>
                     <h4 className="font-bold text-primary text-body-lg">Operating Hours</h4>
-                    <p className="text-on-surface-variant">Mon - Sat: 9:00 AM - 8:00 PM<br/>Sun: 10:00 AM - 2:00 PM</p>
+                    <p className="text-on-surface-variant">Mon - Sat: 9:00 AM - 8:00 PM<br />Sun: 10:00 AM - 2:00 PM</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-5">

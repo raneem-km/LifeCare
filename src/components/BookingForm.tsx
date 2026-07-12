@@ -63,7 +63,7 @@ export default function BookingForm() {
   return (
     <div className="w-full bg-surface-container-lowest p-8 rounded-2xl shadow-soft">
       <form className="space-y-4" onSubmit={handleSubmit}>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="flex flex-col gap-1.5">
             <label className="text-label-md text-on-surface-variant font-medium">First Name</label>
             <Input required name="firstName" placeholder="Enter first name" className="h-12 rounded-xl placeholder:text-slate-400 placeholder:font-normal" />

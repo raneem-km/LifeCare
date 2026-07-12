@@ -77,8 +77,8 @@ export default function TestimonialsSection({ initialDbReviews = [] }: Testimoni
   };
 
   return (
-    <section className="py-2xl bg-primary text-on-primary">
-      <div className="max-w-7xl mx-auto px-margin-desktop">
+    <section className="py-12 md:py-2xl bg-primary text-on-primary">
+      <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
         <div className="text-center mb-xl">
           <h2 className="text-headline-md font-bold mb-4 text-white">What Our Patients Say</h2>
           <div className="w-20 h-1 bg-secondary-container mx-auto animate-pulse"></div>
