@@ -13,6 +13,7 @@ model Booking {
   lastName  String?
   phone     String
   reason    String
+  doctor    String?
   date      String
   createdAt DateTime @default(now())
 }

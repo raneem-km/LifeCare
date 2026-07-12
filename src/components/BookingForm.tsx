@@ -15,6 +15,7 @@ import { createBooking } from "@/app/actions";
 export default function BookingForm() {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [reason, setReason] = useState<string | null>(null);
+  const [doctor, setDoctor] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -33,6 +34,7 @@ export default function BookingForm() {
         lastName: lastName || undefined,
         phone,
         reason,
+        doctor: doctor ?? undefined,
         date
       });
       
@@ -53,7 +55,7 @@ export default function BookingForm() {
         </div>
         <h3 className="text-headline-sm font-bold text-primary mb-2">Appointment Requested!</h3>
         <p className="text-on-surface-variant mb-6">Thank you. Our front desk will call you shortly to confirm your exact time slot.</p>
-        <Button variant="outline" onClick={() => { setIsSubmitted(false); setReason(null); }}>
+        <Button variant="outline" onClick={() => { setIsSubmitted(false); setReason(null); setDoctor(null); }}>
           Book another visit
         </Button>
       </div>
@@ -88,6 +90,20 @@ export default function BookingForm() {
               <SelectItem value="Vaccination">Vaccination</SelectItem>
               <SelectItem value="Pediatric Checkup">Pediatric Checkup</SelectItem>
               <SelectItem value="Lab Test / Blood Draw">Lab Test / Blood Draw</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <label className="text-label-md text-on-surface-variant font-medium">Preferred Doctor (Optional)</label>
+          <Select onValueChange={setDoctor} value={doctor ?? ""}>
+            <SelectTrigger className="h-12 rounded-xl text-base text-left">
+              <SelectValue placeholder="Any Doctor (First Available)" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Any Doctor (First Available)">Any Doctor (First Available)</SelectItem>
+              <SelectItem value="Dr. Anjali Sharma (Primary Care)">Dr. Anjali Sharma (Primary Care)</SelectItem>
+              <SelectItem value="Dr. Rajesh Varma (Family Medicine)">Dr. Rajesh Varma (Family Medicine)</SelectItem>
+              <SelectItem value="Dr. Priya Nair (Pediatrician)">Dr. Priya Nair (Pediatrician)</SelectItem>
             </SelectContent>
           </Select>
         </div>

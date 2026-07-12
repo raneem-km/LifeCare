@@ -27,7 +27,7 @@ export default async function Home() {
             className="object-cover object-center"
             priority
           />
-          <div className="absolute inset-0 bg-surface/90 md:bg-gradient-to-r md:from-surface md:via-surface/95 md:to-surface/20"></div>
+          <div className="absolute inset-0 bg-surface/50 md:bg-gradient-to-r md:from-surface/80 md:via-surface/50 md:to-surface/10"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-md items-center py-12 md:py-xl relative z-10">

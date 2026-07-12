@@ -8,6 +8,7 @@ export interface BookingInput {
   lastName?: string;
   phone: string;
   reason: string;
+  doctor?: string;
   date: string;
 }
 
@@ -28,6 +29,7 @@ export async function createBooking(data: BookingInput) {
         lastName: data.lastName || null,
         phone: data.phone,
         reason: data.reason,
+        doctor: data.doctor || null,
         date: data.date,
       },
     });
