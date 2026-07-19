@@ -264,3 +264,13 @@
     @apply font-sans;
   }
 }
+
+@keyframes textShine {
+  0% { background-position: 0% 50%; }
+  100% { background-position: -200% 50%; }
+}
+
+.animate-text-shine {
+  background-size: 200% auto;
+  animation: textShine 4s linear infinite;
+}

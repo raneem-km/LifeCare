@@ -12,6 +12,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import CountUp from "@/components/CountUpWrapper";
 
 export default async function Home() {
   const dbReviews = await getReviews();
@@ -26,27 +27,35 @@ export default async function Home() {
         <div className="w-full bg-green-50 rounded-2xl shadow-sm border border-green-100 py-12 px-6 my-10">
           <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 divide-x-0 md:divide-x md:divide-green-200">
             
-            {/* Stat 1 */}
+            {/* Stat 1: 15k+ */}
             <div data-aos="fade-up" data-aos-delay="100" className="flex flex-col items-center justify-center text-center">
-              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">15k+</h3>
+              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">
+                <CountUp end={15} suffix="k+" duration={1.5} />
+              </h3>
               <p className="text-sm md:text-base font-semibold text-gray-600 uppercase tracking-wider">Patients Treated</p>
             </div>
 
-            {/* Stat 2 */}
+            {/* Stat 2: 15+ */}
             <div data-aos="fade-up" data-aos-delay="200" className="flex flex-col items-center justify-center text-center">
-              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">15+</h3>
+              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">
+                <CountUp end={15} suffix="+" duration={1.7} />
+              </h3>
               <p className="text-sm md:text-base font-semibold text-gray-600 uppercase tracking-wider">Years Exp.</p>
             </div>
 
-            {/* Stat 3 */}
+            {/* Stat 3: 98% */}
             <div data-aos="fade-up" data-aos-delay="300" className="flex flex-col items-center justify-center text-center">
-              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">98%</h3>
+              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">
+                <CountUp end={98} suffix="%" duration={2.0} />
+              </h3>
               <p className="text-sm md:text-base font-semibold text-gray-600 uppercase tracking-wider">Satisfaction</p>
             </div>
 
-            {/* Stat 4 */}
+            {/* Stat 4: 24/7 */}
             <div data-aos="fade-up" data-aos-delay="400" className="flex flex-col items-center justify-center text-center">
-              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">24/7</h3>
+              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">
+                <CountUp end={24} suffix="/7" duration={1.2} />
+              </h3>
               <p className="text-sm md:text-base font-semibold text-gray-600 uppercase tracking-wider">Support</p>
             </div>
 
