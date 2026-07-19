@@ -16,7 +16,7 @@ export default function Doctors() {
           <div className="w-[350px] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group">
             <div className="aspect-[3/4] overflow-hidden relative">
               <img 
-                src="/dr-basil.jpg" 
+                src="/images/dr-basil.jpg" 
                 alt="Dr. Basil AP" 
                 className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
               />
@@ -47,8 +47,8 @@ export default function Doctors() {
               </div>
               
               <Link 
-                href="/book" 
-                className="mt-6 block w-full bg-blue-500 text-white text-sm font-semibold py-3 rounded-lg hover:bg-blue-600 transition-colors whitespace-nowrap cursor-pointer text-center"
+                href="#booking" 
+                className="mt-6 block w-full bg-secondary text-white text-sm font-semibold py-3 rounded-lg hover:bg-secondary/90 transition-colors whitespace-nowrap cursor-pointer text-center"
               >
                 Book Appointment
               </Link>
@@ -59,7 +59,7 @@ export default function Doctors() {
           <div className="w-[350px] bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 cursor-pointer group">
             <div className="aspect-[3/4] overflow-hidden relative">
               <img 
-                src="/dr-sidrathul.jpg" 
+                src="/images/dr-sidrathul.jpg" 
                 alt="Dr. Sidrathul Munthaha" 
                 className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
               />
@@ -90,8 +90,8 @@ export default function Doctors() {
               </div>
               
               <Link 
-                href="/book" 
-                className="mt-6 block w-full bg-blue-500 text-white text-sm font-semibold py-3 rounded-lg hover:bg-blue-600 transition-colors whitespace-nowrap cursor-pointer text-center"
+                href="#booking" 
+                className="mt-6 block w-full bg-secondary text-white text-sm font-semibold py-3 rounded-lg hover:bg-secondary/90 transition-colors whitespace-nowrap cursor-pointer text-center"
               >
                 Book Appointment
               </Link>

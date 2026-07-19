@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import HeroSection from "@/components/HeroSection";
 import BookingForm from "@/components/BookingForm";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import ServicesSection from "@/components/ServicesSection";
+import Doctors from "@/components/Doctors";
 import { getReviews } from "@/app/actions";
-import { Button } from "@/components/ui/button";
 import {
   Accordion,
   AccordionContent,
@@ -14,279 +15,189 @@ import {
 
 export default async function Home() {
   const dbReviews = await getReviews();
+
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-[600px] md:min-h-[870px] flex items-center overflow-hidden">
-        {/* Background Hospital Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/clinic-building.jpg"
-            alt="CityHealth Clinic Building"
-            fill
-            className="object-cover object-center"
-            priority
-          />
-          <div className="absolute inset-0 bg-surface/50 md:bg-gradient-to-r md:from-surface/80 md:via-surface/50 md:to-surface/10"></div>
-        </div>
+      <HeroSection />
 
-        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-12 gap-md items-center py-12 md:py-xl relative z-10">
-          <div className="space-y-sm md:col-span-8 pr-0 lg:pr-8">
-            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-label-md font-bold uppercase tracking-wider backdrop-blur-md">
-              Your Trusted Local Clinic
-            </span>
-            <h1 className="font-display-lg text-display-lg leading-tight text-primary">
-              Compassionate Care, <span className="text-secondary">Centered Around You</span>
-            </h1>
-            <p className="text-on-surface-variant text-body-lg max-w-3xl">
-              Experience personalized medical care at CityHealth Clinic. Our dedicated team of primary care<br className="hidden lg:block" /> physicians is here to support your everyday health and well-being in a friendly, comfortable environment.
-            </p>
-            <div className="flex flex-wrap gap-md pt-sm items-center">
-              <Link
-                href="#booking"
-                className="inline-flex shrink-0 items-center justify-center rounded-2xl h-14 px-8 text-lg font-bold shadow-lg shadow-primary/20 bg-primary text-primary-foreground hover:bg-primary/80 transition-all"
-              >
-                Book Appointment
-              </Link>
-              <Link
-                href="#services"
-                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-2xl h-14 px-6 text-lg font-bold text-primary border border-primary/20 hover:bg-primary/5 transition-all bg-white/50 backdrop-blur-sm"
-              >
-                <span className="material-symbols-outlined">medical_services</span>
-                View Our Services
-              </Link>
-              <div className="flex items-center gap-2.5 bg-white/85 backdrop-blur-md px-5 py-3 rounded-2xl border border-slate-200 shadow-sm ml-0 md:ml-4">
-                <div className="bg-emerald-100 p-1.5 rounded-xl text-emerald-600 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-xl" style={{ fontVariationSettings: "'FILL' 1" }}>verified</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="text-lg font-extrabold text-slate-900">5k+</span>
-                  <span className="text-slate-500 text-sm font-semibold">Happy Patients</span>
-                </div>
-              </div>
+      {/* Clinic Statistics Section */}
+      <section className="max-w-7xl mx-auto px-4 md:px-8">
+        <div className="w-full bg-green-50 rounded-2xl shadow-sm border border-green-100 py-12 px-6 my-10">
+          <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 divide-x-0 md:divide-x md:divide-green-200">
+            
+            {/* Stat 1 */}
+            <div data-aos="fade-up" data-aos-delay="100" className="flex flex-col items-center justify-center text-center">
+              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">15k+</h3>
+              <p className="text-sm md:text-base font-semibold text-gray-600 uppercase tracking-wider">Patients Treated</p>
             </div>
+
+            {/* Stat 2 */}
+            <div data-aos="fade-up" data-aos-delay="200" className="flex flex-col items-center justify-center text-center">
+              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">15+</h3>
+              <p className="text-sm md:text-base font-semibold text-gray-600 uppercase tracking-wider">Years Exp.</p>
+            </div>
+
+            {/* Stat 3 */}
+            <div data-aos="fade-up" data-aos-delay="300" className="flex flex-col items-center justify-center text-center">
+              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">98%</h3>
+              <p className="text-sm md:text-base font-semibold text-gray-600 uppercase tracking-wider">Satisfaction</p>
+            </div>
+
+            {/* Stat 4 */}
+            <div data-aos="fade-up" data-aos-delay="400" className="flex flex-col items-center justify-center text-center">
+              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">24/7</h3>
+              <p className="text-sm md:text-base font-semibold text-gray-600 uppercase tracking-wider">Support</p>
+            </div>
+
           </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section className="py-2xl bg-surface-bright" id="services">
-        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
-          <div className="text-center mb-xl">
-            <h2 className="text-headline-md font-bold text-primary mb-4">Our Clinic Services</h2>
-            <p className="text-on-surface-variant max-w-4xl mx-auto">
-              Comprehensive healthcare solutions tailored for your everyday needs.<br className="hidden lg:block" /> From routine checkups to minor procedures.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
-              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">medical_services</span>
-              </div>
-              <h3 className="text-headline-sm font-bold text-primary mb-3">General Consultation</h3>
-              <p className="text-on-surface-variant mb-6 flex-grow">Expert primary care for fevers, infections, and common illnesses for patients of all ages.</p>
-              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
-                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </Link>
-            </div>
-            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
-              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">health_and_safety</span>
-              </div>
-              <h3 className="text-headline-sm font-bold text-primary mb-3">Preventative Care</h3>
-              <p className="text-on-surface-variant mb-6 flex-grow">Routine health checkups, blood pressure monitoring, and wellness plans to keep you healthy.</p>
-              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
-                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </Link>
-            </div>
-            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
-              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">vaccines</span>
-              </div>
-              <h3 className="text-headline-sm font-bold text-primary mb-3">Vaccinations</h3>
-              <p className="text-on-surface-variant mb-6 flex-grow">Standard immunizations for children and adults, including flu shots and travel vaccines.</p>
-              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
-                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </Link>
-            </div>
-            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
-              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">science</span>
-              </div>
-              <h3 className="text-headline-sm font-bold text-primary mb-3">Diagnostic Lab Tests</h3>
-              <p className="text-on-surface-variant mb-6 flex-grow">On-site sample collection for blood work, sugar levels, and other essential diagnostic tests.</p>
-              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
-                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </Link>
-            </div>
-            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
-              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">child_care</span>
-              </div>
-              <h3 className="text-headline-sm font-bold text-primary mb-3">Pediatrics</h3>
-              <p className="text-on-surface-variant mb-6 flex-grow">Gentle and specialized medical care for infants, children, and adolescents in a warm environment.</p>
-              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
-                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </Link>
-            </div>
-            <div className="bg-surface-container-lowest p-8 rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start">
-              <div className="bg-secondary/10 w-14 h-14 rounded-xl flex items-center justify-center mb-6 group-hover:bg-secondary group-hover:text-on-secondary transition-colors">
-                <span className="material-symbols-outlined text-secondary group-hover:text-on-secondary">healing</span>
-              </div>
-              <h3 className="text-headline-sm font-bold text-primary mb-3">Minor Procedures</h3>
-              <p className="text-on-surface-variant mb-6 flex-grow">Wound care, minor suturing, dressing changes, and other in-clinic outpatient procedures.</p>
-              <Link href="#services" className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all">
-                Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-12 md:py-2xl bg-surface-container-low" id="about">
-        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-xl items-center">
-            <div className="lg:col-span-7">
-              <h2 className="text-headline-md font-bold text-primary mb-6">Why Choose CityHealth?</h2>
-              <p className="text-on-surface-variant text-body-lg mb-10">We believe healthcare should be accessible, personal, and stress-free. Our clinic is designed to put you at ease while providing top-notch medical attention.</p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-md">
-                <div className="flex flex-col gap-3">
-                  <span className="material-symbols-outlined text-secondary text-4xl">schedule</span>
-                  <h4 className="font-bold text-primary">Short Wait Times</h4>
-                  <p className="text-sm text-on-surface-variant">We respect your time. Walk-ins and appointments are managed efficiently.</p>
-                </div>
-                <div className="flex flex-col gap-3">
-                  <span className="material-symbols-outlined text-secondary text-4xl">clinical_notes</span>
-                  <h4 className="font-bold text-primary">Experienced Doctors</h4>
-                  <p className="text-sm text-on-surface-variant">Our certified primary care physicians have decades of experience.</p>
-                </div>
-                <div className="flex flex-col gap-3">
-                  <span className="material-symbols-outlined text-secondary text-4xl">biotech</span>
-                  <h4 className="font-bold text-primary">Modern Facility</h4>
-                  <p className="text-sm text-on-surface-variant">Clean, comfortable, and equipped with modern diagnostic tools.</p>
-                </div>
-                <div className="flex flex-col gap-3">
-                  <span className="material-symbols-outlined text-secondary text-4xl">volunteer_activism</span>
-                  <h4 className="font-bold text-primary">Patient First</h4>
-                  <p className="text-sm text-on-surface-variant">We listen carefully and build care plans that prioritize your well-being.</p>
-                </div>
-              </div>
-            </div>
-            <div className="relative lg:col-span-5">
-              <div className="aspect-square bg-primary-container/5 rounded-3xl overflow-hidden p-8 border border-surface-variant relative">
-                <Image
-                  src="/images/clinic-building.jpg"
-                  alt="Exterior of CityHealth Clinic"
-                  fill
-                  className="object-cover rounded-2xl shadow-xl"
-                  sizes="(min-width: 1280px) 570px, (min-width: 1024px) 50vw, 100vw"
-                  priority
-                />
-              </div>
-              <div className="absolute -top-6 -right-6 bg-secondary text-on-secondary p-8 rounded-2xl shadow-lg hidden md:block">
-                <p className="text-4xl font-bold">15+</p>
-                <p className="text-sm opacity-90 uppercase tracking-widest font-bold">Years in the Community</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ServicesSection />
 
       {/* Meet Our Doctors */}
-      <section className="py-12 md:py-2xl bg-surface-bright" id="doctors">
-        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-xl gap-md">
-            <div className="max-w-xl">
-              <h2 className="text-headline-md font-bold text-primary mb-4">Meet Our Clinic Team</h2>
+      <Doctors />
+
+      {/* Why Choose Us */}
+      <section className="py-20 bg-white border-y border-slate-200/40" id="about">
+        <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop text-center">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold uppercase tracking-wider mb-3">
+            Why Choose Us
+          </span>
+          <h2 className="text-headline-md font-bold text-secondary mb-12">The Life Care Difference</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div data-aos="fade-up" data-aos-delay="0" className="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-lg transition-all duration-300">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto mb-6">
+                <span className="material-symbols-outlined text-[32px]">science</span>
+              </div>
+              <h4 className="text-xl font-bold text-secondary mb-3">Root-Cause Healing</h4>
+              <p className="text-slate-500 text-sm leading-relaxed">
+                We blend detailed clinical diagnosis with classical homeopathic principles to address the underlying root cause of your illness, rather than simply suppressing temporary symptoms.
+              </p>
             </div>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-gutter justify-center">
-            <div className="group">
-              <div className="aspect-[3/4] rounded-2xl overflow-hidden mb-6 relative">
-                <Image alt="Dr. Anjali Sharma" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" fill src="https://lh3.googleusercontent.com/aida-public/AB6AXuBZbxgjKmg7KFJwF7daT81g6_hdF2SQHuxeS9OpKX0hXhKUCZilQPT2_LkvaSoXX8H28iDBMAhjpq8adCRvGg394bAveQLq1rAhs8SpA5VUUvhYra7yHbCBNj1HbmyX54Fy8-OrL7PHJaIrB2akd3PulZfx5D1oGAASMKICWqpq5dq5rc-gDBhy7-MzlZ6yLwy72h-yIapmmUpwVJG0oBR8orSRgSpAXzeSG8HU48TldqeXf2xjjKJP" sizes="(min-width: 1280px) 380px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                  <Link href="#booking" className="inline-flex w-full h-12 rounded-xl items-center justify-center text-primary bg-surface hover:bg-surface-bright shadow-lg">
-                    Book with Anjali
-                  </Link>
-                </div>
+            <div data-aos="fade-up" data-aos-delay="100" className="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-lg transition-all duration-300">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto mb-6">
+                <span className="material-symbols-outlined text-[32px]">person_check</span>
               </div>
-              <h4 className="text-headline-sm font-bold text-primary">Dr. Anjali Sharma</h4>
-              <p className="text-secondary font-label-md mb-2">Primary Care Physician</p>
-              <div className="text-sm text-on-surface-variant space-y-1 mt-3 border-t border-surface-variant/20 pt-3">
-                <p><strong>Qualifications:</strong> MBBS, MD (Internal Medicine)</p>
-                <p><strong>Specialties:</strong> Preventive Care, Chronic Disease Management</p>
-                <p><strong>Available:</strong> Mon, Wed, Fri (9:00 AM - 5:00 PM)</p>
-              </div>
+              <h4 className="text-xl font-bold text-secondary mb-3">Constitutional Care</h4>
+              <p className="text-slate-500 text-sm leading-relaxed">
+                Every patient receives a highly individualized remedy chosen specifically for their unique physical constitution, emotional well-being, and detailed health history.
+              </p>
             </div>
-            <div className="group">
-              <div className="aspect-[3/4] rounded-2xl overflow-hidden mb-6 relative">
-                <Image alt="Dr. Rajesh Varma" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" fill src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzA7R8RBrdGvzA2zogjwWGiie5qo-VX07UxVsdipODdWe6EbdyuYenQJZqoHw2RrucW0Hn9f9R4v9oc6Q9A56du7K7xF3et_7kXA2xm8_5M6FqeSp0wNQsouC0nn9KJELpUL3RJkRPc2GcD7yyG0XTIpOoH5zadhlVAysmBkQ4NLdfe_7YF1CgE5FgeJOre0gA54O0Wbe8NaBfEtfr9B1_BJztPwWPLxJ-BTDYKXuSDEh15bJe0owe" sizes="(min-width: 1280px) 380px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                  <Link href="#booking" className="inline-flex w-full h-12 rounded-xl items-center justify-center text-primary bg-surface hover:bg-surface-bright shadow-lg">
-                    Book with Rajesh
-                  </Link>
-                </div>
+            <div data-aos="fade-up" data-aos-delay="200" className="p-6 bg-slate-50 rounded-2xl border border-slate-100 hover:shadow-lg transition-all duration-300">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary mx-auto mb-6">
+                <span className="material-symbols-outlined text-[32px]">verified_user</span>
               </div>
-              <h4 className="text-headline-sm font-bold text-primary">Dr. Rajesh Varma</h4>
-              <p className="text-secondary font-label-md mb-2">Family Medicine</p>
-              <div className="text-sm text-on-surface-variant space-y-1 mt-3 border-t border-surface-variant/20 pt-3">
-                <p><strong>Qualifications:</strong> MBBS, DNB (Family Medicine)</p>
-                <p><strong>Specialties:</strong> Geriatric Care, Lifestyle Disorders</p>
-                <p><strong>Available:</strong> Tue, Thu, Sat (10:00 AM - 6:00 PM)</p>
-              </div>
-            </div>
-            <div className="group">
-              <div className="aspect-[3/4] rounded-2xl overflow-hidden mb-6 relative">
-                <Image alt="Dr. Priya Nair" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" fill src="/images/priya_nair.png" sizes="(min-width: 1280px) 380px, (min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                  <Link href="#booking" className="inline-flex w-full h-12 rounded-xl items-center justify-center text-primary bg-surface hover:bg-surface-bright shadow-lg">
-                    Book with Priya
-                  </Link>
-                </div>
-              </div>
-              <h4 className="text-headline-sm font-bold text-primary">Dr. Priya Nair</h4>
-              <p className="text-secondary font-label-md mb-2">Pediatrician</p>
-              <div className="text-sm text-on-surface-variant space-y-1 mt-3 border-t border-surface-variant/20 pt-3">
-                <p><strong>Qualifications:</strong> MBBS, MD (Pediatrics)</p>
-                <p><strong>Specialties:</strong> Child Immunization, Neonatal Care</p>
-                <p><strong>Available:</strong> Mon - Sat (9:00 AM - 1:00 PM)</p>
-              </div>
+              <h4 className="text-xl font-bold text-secondary mb-3">Gentle &amp; Side-Effect Free</h4>
+              <p className="text-slate-500 text-sm leading-relaxed">
+                Our homeopathic medicines are 100% natural, gentle on the body, and completely free from harsh side effects—making them perfectly safe for everyone, from newborns and pregnant women to the elderly.
+              </p>
             </div>
           </div>
         </div>
+      </section>
+
+      {/* Appointment CTA Block */}
+      <section className="py-20 bg-secondary relative overflow-hidden text-center text-white">
+        <div className="max-w-4xl mx-auto px-margin-mobile md:px-0 relative z-10 space-y-6">
+          <h2 className="text-3xl md:text-5xl font-extrabold tracking-tight">Ready to start your healing journey?</h2>
+          <p className="text-body-lg opacity-90 max-w-4xl mx-auto">
+            Consult with our experienced practitioners today. We offer convenient in-clinic and remote video consultations across Kerala.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+            <Link className="w-full sm:w-auto bg-primary text-white font-bold px-8 py-4 rounded-xl hover:scale-105 hover:bg-primary/95 transition-all shadow-lg text-lg animate-bounce" href="#booking">
+              Book My Appointment
+            </Link>
+            <a className="w-full sm:w-auto border border-white/20 hover:bg-white/10 text-white font-bold px-8 py-4 rounded-xl hover:scale-105 transition-all flex items-center justify-center gap-2 text-lg" href="tel:+917736643050">
+              <span className="material-symbols-outlined">call</span>
+              +91 77366 43050
+            </a>
+          </div>
+        </div>
+        {/* Decorative elements */}
+        <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
+        <div className="absolute -top-20 -right-20 w-64 h-64 bg-primary/10 rounded-full blur-3xl"></div>
       </section>
 
       {/* Testimonials */}
       <TestimonialsSection initialDbReviews={dbReviews} />
 
-      {/* FAQ Section */}
-      <section className="py-12 md:py-2xl bg-surface-bright">
+      {/* Frequently Asked Questions */}
+      <section className="py-20 bg-slate-50 border-t border-slate-100" id="faq">
         <div className="max-w-3xl mx-auto px-margin-mobile md:px-0">
-          <h2 className="text-headline-md font-bold text-primary text-center mb-xl">Frequently Asked Questions</h2>
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold uppercase tracking-wider mb-3">
+              FAQ
+            </span>
+            <h2 className="text-headline-md font-bold text-secondary">Frequently Asked Questions</h2>
+            <p className="text-sm text-slate-500 mt-2">Get expert answers regarding homeopathic treatment at our clinic.</p>
+          </div>
+          
           <Accordion defaultValue={[]} className="w-full space-y-4">
-            <AccordionItem value="item-1" className="border border-surface-variant/50 rounded-2xl bg-surface-container-low px-6 data-[state=open]:bg-surface-container transition-all">
-              <AccordionTrigger className="text-body-lg font-bold text-primary hover:no-underline py-6">
-                Do you accept walk-in patients?
+            <AccordionItem value="faq-1" className="border border-slate-200 rounded-2xl bg-white px-6 data-[state=open]:border-primary transition-all">
+              <AccordionTrigger className="text-base md:text-lg font-bold text-secondary hover:no-underline py-5 text-left">
+                Is homeopathy effective for migraines?
               </AccordionTrigger>
-              <AccordionContent className="text-on-surface-variant pb-6 text-base">
-                Yes! We welcome walk-in patients for general consultations and minor illnesses. However, booking an appointment helps minimize your wait time.
+              <AccordionContent className="text-slate-500 pb-5 text-sm md:text-base leading-relaxed">
+                Yes, homeopathy offers personalized treatments that address the root cause of migraines, often reducing frequency and intensity.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="item-2" className="border border-surface-variant/50 rounded-2xl bg-surface-container-low px-6 data-[state=open]:bg-surface-container transition-all">
-              <AccordionTrigger className="text-body-lg font-bold text-primary hover:no-underline py-6">
-                How should I prepare for my first appointment?
+            <AccordionItem value="faq-2" className="border border-slate-200 rounded-2xl bg-white px-6 data-[state=open]:border-primary transition-all">
+              <AccordionTrigger className="text-base md:text-lg font-bold text-secondary hover:no-underline py-5 text-left">
+                Can piles be treated without surgery using homeopathy?
               </AccordionTrigger>
-              <AccordionContent className="text-on-surface-variant pb-6 text-base">
-                Please bring a valid ID, your health insurance details (if applicable), and a list of your current medications. We recommend arriving 10 minutes early.
+              <AccordionContent className="text-slate-500 pb-5 text-sm md:text-base leading-relaxed">
+                Yes, many cases of hemorrhoids respond well to homeopathic medicine, providing relief from pain and swelling without surgical intervention.
               </AccordionContent>
             </AccordionItem>
-            <AccordionItem value="item-3" className="border border-surface-variant/50 rounded-2xl bg-surface-container-low px-6 data-[state=open]:bg-surface-container transition-all">
-              <AccordionTrigger className="text-body-lg font-bold text-primary hover:no-underline py-6">
-                Do you offer on-site blood tests?
+            <AccordionItem value="faq-3" className="border border-slate-200 rounded-2xl bg-white px-6 data-[state=open]:border-primary transition-all">
+              <AccordionTrigger className="text-base md:text-lg font-bold text-secondary hover:no-underline py-5 text-left">
+                Is online homeopathy consultation available in Kerala?
               </AccordionTrigger>
-              <AccordionContent className="text-on-surface-variant pb-6 text-base">
-                Yes, our clinic has an integrated lab collection center so you can get your diagnostic samples taken immediately after your consultation.
+              <AccordionContent className="text-slate-500 pb-5 text-sm md:text-base leading-relaxed">
+                Absolutely. We provide convenient online video consultations for patients across Kerala and beyond.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="faq-4" className="border border-slate-200 rounded-2xl bg-white px-6 data-[state=open]:border-primary transition-all">
+              <AccordionTrigger className="text-base md:text-lg font-bold text-secondary hover:no-underline py-5 text-left">
+                How does homeopathy help with women's health and PCOD?
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-500 pb-5 text-sm md:text-base leading-relaxed">
+                Homeopathy works to balance hormones naturally, making it highly effective for PCOD, menstrual irregularities, and other women's health concerns.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="faq-5" className="border border-slate-200 rounded-2xl bg-white px-6 data-[state=open]:border-primary transition-all">
+              <AccordionTrigger className="text-base md:text-lg font-bold text-secondary hover:no-underline py-5 text-left">
+                Is homeopathy safe for children and immunity boosting?
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-500 pb-5 text-sm md:text-base leading-relaxed">
+                Homeopathy is exceptionally safe for children, using gentle, non-toxic remedies to strengthen their natural immune response.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="faq-6" className="border border-slate-200 rounded-2xl bg-white px-6 data-[state=open]:border-primary transition-all">
+              <AccordionTrigger className="text-base md:text-lg font-bold text-secondary hover:no-underline py-5 text-left">
+                What chronic diseases can be treated with homeopathy in Malappuram?
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-500 pb-5 text-sm md:text-base leading-relaxed">
+                We treat a wide range of chronic conditions including asthma, skin disorders, arthritis, and digestive issues at our Manjeri clinic.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="faq-7" className="border border-slate-200 rounded-2xl bg-white px-6 data-[state=open]:border-primary transition-all">
+              <AccordionTrigger className="text-base md:text-lg font-bold text-secondary hover:no-underline py-5 text-left">
+                How long does homeopathic treatment take to show results?
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-500 pb-5 text-sm md:text-base leading-relaxed">
+                While acute cases can see quick relief, chronic conditions typically require 3-6 months to show significant, long-lasting improvement.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="faq-8" className="border border-slate-200 rounded-2xl bg-white px-6 data-[state=open]:border-primary transition-all">
+              <AccordionTrigger className="text-base md:text-lg font-bold text-secondary hover:no-underline py-5 text-left">
+                What makes Life Care Homeopathic Clinic different from other clinics?
+              </AccordionTrigger>
+              <AccordionContent className="text-slate-500 pb-5 text-sm md:text-base leading-relaxed">
+                Our 15+ years of experience, personalized treatment protocols, and commitment to evidence-based homeopathic practice set us apart.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
@@ -294,24 +205,29 @@ export default async function Home() {
       </section>
 
       {/* Appointment Booking */}
-      <section className="py-12 md:py-2xl relative overflow-hidden" id="booking">
+      <section className="py-20 relative overflow-hidden" id="booking">
         <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
-          <div className="bg-surface-container p-8 md:p-16 rounded-3xl shadow-xl flex flex-col md:flex-row items-center gap-xl relative z-10 border border-surface-variant/20">
-            <div className="w-full md:w-1/2">
-              <h2 className="text-headline-md font-bold text-primary mb-6">Schedule Your Visit</h2>
-              <p className="text-on-surface-variant mb-8">Take the first step towards better health. Fill out the form or call our clinic desk directly to book an appointment.</p>
-              <div className="flex flex-col gap-4">
+          <div className="bg-slate-50 p-8 md:p-16 rounded-3xl border border-slate-200/60 shadow-xl flex flex-col md:flex-row items-stretch gap-12 relative z-10">
+            <div className="w-full md:w-1/2 flex flex-col justify-center">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold uppercase tracking-wider mb-3 self-start">
+                Booking
+              </span>
+              <h2 className="text-3xl md:text-4xl font-extrabold text-secondary mb-6">Schedule Your Visit</h2>
+              <p className="text-slate-500 mb-8 leading-relaxed">
+                Take the first step towards recovery and natural well-being. Fill out the form or call our clinic desk directly to book your slot.
+              </p>
+              <div className="space-y-4">
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-secondary">call</span>
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                    <span className="material-symbols-outlined">call</span>
                   </div>
-                  <span className="font-bold text-primary">+91 (80) 4000-CLINIC</span>
+                  <span className="font-bold text-secondary">+91 77366 43050</span>
                 </div>
                 <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center">
-                    <span className="material-symbols-outlined text-secondary">mail</span>
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                    <span className="material-symbols-outlined">mail</span>
                   </div>
-                  <span className="font-bold text-primary">hello@cityhealthclinic.in</span>
+                  <span className="font-bold text-secondary">basilhappyhome@gmail.com</span>
                 </div>
               </div>
             </div>
@@ -320,54 +236,96 @@ export default async function Home() {
             </div>
           </div>
         </div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150%] h-full bg-secondary-container/20 -skew-y-6 -z-0"></div>
       </section>
 
-      {/* Map & Contact */}
-      <section className="py-12 md:py-2xl bg-surface-bright" id="contact">
+      {/* Clinic Locations and Branch Maps */}
+      <section className="py-20 bg-white" id="locations">
         <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter items-stretch">
-            <div className="rounded-3xl overflow-hidden h-[450px] shadow-soft border border-surface-variant/30 relative">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3887.9847242277496!2d77.63782937574888!3d12.972847687342885!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae16a3c6130d2d%3A0xf63eb9b46dfa04bb!2sIndiranagar%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1719572948731!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                loading="lazy"
-                allowFullScreen
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold uppercase tracking-wider mb-3">
+              Locations
+            </span>
+            <h2 className="text-headline-md font-bold text-secondary mb-4">Find Our Clinic Locations</h2>
+            <p className="text-slate-500 max-w-3xl mx-auto">
+              Visit us at either of our convenient locations in Manjeri for professional homeopathic care and personalized treatment.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+            {/* Card 1: Main Clinic */}
+            <div className="bg-slate-50 rounded-3xl overflow-hidden shadow-sm border border-slate-200/50 flex flex-col hover:shadow-lg transition-all duration-300">
+              <div className="h-64 w-full relative">
+                <iframe
+                  title="Main Clinic Location (Manjeri)"
+                  allowFullScreen
+                  className="w-full h-full"
+                  loading="lazy"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3914.8!2d76.1194!3d11.1204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba64a6666666667%3A0x0!2zMTHCsDA3JzEzLjQiTiA3NsKwMDcnMDkuOCJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  style={{ border: 0 }}
+                />
+              </div>
+              <div className="p-8 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold text-secondary mb-4">Main Clinic (JSS Shopping Mall)</h3>
+                <div className="space-y-4 mb-8 flex-grow">
+                  <div className="flex gap-3 text-slate-500 text-sm md:text-base">
+                    <span className="material-symbols-outlined text-primary">location_on</span>
+                    <span>Kuthukal Junction, C H Bypass, Manjeri, Kerala 676123</span>
+                  </div>
+                  <div className="flex items-center gap-3 text-slate-500 text-sm md:text-base">
+                    <span className="material-symbols-outlined text-primary">call</span>
+                    <span>+91 77366 43050</span>
+                  </div>
+                  <div className="flex gap-3 text-slate-500 text-sm md:text-base">
+                    <span className="material-symbols-outlined text-primary">schedule</span>
+                    <span>Mon-Thu &amp; Sat: 10:00 AM - 1:00 PM, 3:30 - 5:30 PM | Fri: 10:00 AM - 12:00 PM, 3:30 - 5:30 PM</span>
+                  </div>
+                </div>
+                <a
+                  className="w-full bg-secondary hover:bg-secondary/90 text-white py-3.5 rounded-xl font-bold text-center transition-all block"
+                  href="https://www.google.com/maps/dir/?api=1&destination=11.1204,76.1194"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Get Directions
+                </a>
+              </div>
             </div>
-            <div className="bg-surface-container-lowest p-10 rounded-3xl shadow-soft border border-surface-variant/30 flex flex-col justify-center">
-              <h2 className="text-headline-md font-bold text-primary mb-8">Visit Our Clinic</h2>
-              <div className="space-y-8">
-                <div className="flex items-start gap-5">
-                  <div className="bg-secondary/10 p-3 rounded-xl">
-                    <span className="material-symbols-outlined text-secondary">location_on</span>
+
+            {/* Card 2: Karaparambu Branch */}
+            <div className="bg-slate-50 rounded-3xl overflow-hidden shadow-sm border border-slate-200/50 flex flex-col hover:shadow-lg transition-all duration-300">
+              <div className="h-64 w-full relative">
+                <iframe
+                  title="Karaparambu Branch Location"
+                  allowFullScreen
+                  className="w-full h-full"
+                  loading="lazy"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3914.5!2d76.1!3d11.1!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTHCsDA2JzAwLjAiTiA3NsKwMDYnMDAuMCJF!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                  style={{ border: 0 }}
+                />
+              </div>
+              <div className="p-8 flex flex-col flex-grow">
+                <h3 className="text-xl font-bold text-secondary mb-4">Karaparambu Branch</h3>
+                <div className="space-y-4 mb-8 flex-grow">
+                  <div className="flex gap-3 text-slate-500 text-sm md:text-base">
+                    <span className="material-symbols-outlined text-primary">location_on</span>
+                    <span>Manjeri Areecode Road, Karaparambu, Kerala, India</span>
                   </div>
-                  <div>
-                    <h4 className="font-bold text-primary text-body-lg">Clinic Address</h4>
-                    <p className="text-on-surface-variant">Shop No. 12, High Street<br />Indiranagar, Bengaluru 560038</p>
+                  <div className="flex items-center gap-3 text-slate-500 text-sm md:text-base">
+                    <span className="material-symbols-outlined text-primary">call</span>
+                    <span>+91 77366 43050</span>
+                  </div>
+                  <div className="flex gap-3 text-slate-500 text-sm md:text-base">
+                    <span className="material-symbols-outlined text-primary">schedule</span>
+                    <span>Mon-Thu &amp; Sat: 10:00 AM - 1:00 PM, 3:30 - 5:30 PM | Fri: 10:00 AM - 12:00 PM, 3:30 - 5:30 PM</span>
                   </div>
                 </div>
-                <div className="flex items-start gap-5">
-                  <div className="bg-secondary/10 p-3 rounded-xl">
-                    <span className="material-symbols-outlined text-secondary">schedule</span>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-primary text-body-lg">Operating Hours</h4>
-                    <p className="text-on-surface-variant">Mon - Sat: 9:00 AM - 8:00 PM<br />Sun: 10:00 AM - 2:00 PM</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-5">
-                  <div className="bg-secondary/10 p-3 rounded-xl">
-                    <span className="material-symbols-outlined text-secondary">directions_car</span>
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-primary text-body-lg">Parking</h4>
-                    <p className="text-on-surface-variant">Street parking available in front of the clinic.</p>
-                  </div>
-                </div>
+                <a
+                  className="w-full bg-secondary hover:bg-secondary/90 text-white py-3.5 rounded-xl font-bold text-center transition-all block"
+                  href="https://www.google.com/maps/dir/?api=1&destination=11.1,76.1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Get Directions
+                </a>
               </div>
             </div>
           </div>

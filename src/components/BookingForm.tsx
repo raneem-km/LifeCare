@@ -3,59 +3,90 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { createBooking } from "@/app/actions";
 
 export default function BookingForm() {
+  const [step, setStep] = useState(1);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [reason, setReason] = useState<string | null>(null);
-  const [doctor, setDoctor] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  // Form State
+  const [fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const [doctor, setDoctor] = useState("");
+  const [mode, setMode] = useState("");
+  const [location, setLocation] = useState("");
+  const [reason, setReason] = useState("");
+  const [date, setDate] = useState("");
+  const [time, setTime] = useState("");
+  const [message, setMessage] = useState("");
+
+  const nextStep = () => {
+    if (step === 1 && (!fullName || !phone)) {
+      alert("Please fill in your name and phone number.");
+      return;
+    }
+    if (step === 2 && (!doctor || !mode || !location || !reason)) {
+      alert("Please select doctor, mode, location, and reason.");
+      return;
+    }
+    if (step === 3 && (!date || !time)) {
+      alert("Please select date and preferred time slot.");
+      return;
+    }
+    setStep((prev) => prev + 1);
+  };
+
+  const prevStep = () => setStep((prev) => prev - 1);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    
-    const formData = new FormData(e.currentTarget);
-    const firstName = formData.get("firstName") as string;
-    const lastName = formData.get("lastName") as string;
-    const phone = formData.get("phone") as string;
-    const date = formData.get("date") as string;
-    
-    if (firstName && phone && reason && date) {
-      const res = await createBooking({
-        firstName,
-        lastName: lastName || undefined,
-        phone,
-        reason,
-        doctor: doctor ?? undefined,
-        date
-      });
-      
-      if (res.success) {
-        setIsSubmitted(true);
-      } else {
-        alert("Booking request failed. Please try again.");
-      }
+
+    // Combine step data into database columns safely
+    const combinedReason = `Reason: ${reason} [Mode: ${mode} | Location: ${location} | Time: ${time} | Email: ${email || "None"}${message ? ` | Message: ${message}` : ""}`;
+
+    const res = await createBooking({
+      firstName: fullName,
+      phone: phone,
+      reason: combinedReason,
+      doctor: doctor,
+      date: date,
+    });
+
+    if (res.success) {
+      setIsSubmitted(true);
+    } else {
+      alert("Booking request failed. Please try again.");
     }
     setIsLoading(false);
   };
 
+  const resetForm = () => {
+    setFullName("");
+    setPhone("");
+    setEmail("");
+    setDoctor("");
+    setMode("");
+    setLocation("");
+    setReason("");
+    setDate("");
+    setTime("");
+    setMessage("");
+    setStep(1);
+    setIsSubmitted(false);
+  };
+
   if (isSubmitted) {
     return (
-      <div className="w-full bg-surface-container-lowest p-8 rounded-2xl shadow-soft text-center h-full flex flex-col justify-center items-center">
-        <div className="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mb-6">
-          <span className="material-symbols-outlined text-secondary text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+      <div className="w-full bg-white p-8 rounded-3xl border border-slate-200/60 shadow-xl text-center h-full flex flex-col justify-center items-center">
+        <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 text-primary">
+          <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
         </div>
-        <h3 className="text-headline-sm font-bold text-primary mb-2">Appointment Requested!</h3>
-        <p className="text-on-surface-variant mb-6">Thank you. Our front desk will call you shortly to confirm your exact time slot.</p>
-        <Button variant="outline" onClick={() => { setIsSubmitted(false); setReason(null); setDoctor(null); }}>
+        <h3 className="text-2xl font-bold text-secondary mb-2">Request Submitted!</h3>
+        <p className="text-slate-500 mb-6 max-w-sm">Thank you. Our front desk will call you shortly via WhatsApp or phone call to confirm your final slot timing.</p>
+        <Button variant="outline" className="rounded-xl px-6 py-2" onClick={resetForm}>
           Book another visit
         </Button>
       </div>
@@ -63,57 +94,260 @@ export default function BookingForm() {
   }
 
   return (
-    <div className="w-full bg-surface-container-lowest p-8 rounded-2xl shadow-soft">
-      <form className="space-y-4" onSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="flex flex-col gap-1.5">
-            <label className="text-label-md text-on-surface-variant font-medium">First Name</label>
-            <Input required name="firstName" placeholder="Enter first name" className="h-12 rounded-xl placeholder:text-slate-400 placeholder:font-normal" />
+    <div className="w-full bg-white p-8 rounded-3xl border border-slate-200/60 shadow-xl">
+      {/* Progress Indicators */}
+      <div className="flex justify-between items-center mb-8">
+        {[1, 2, 3, 4].map((num) => (
+          <div key={num} className="flex items-center flex-1 last:flex-none">
+            <div
+              className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs transition-colors ${
+                step >= num ? "bg-primary text-white" : "bg-slate-100 text-slate-400"
+              }`}
+            >
+              {num}
+            </div>
+            {num < 4 && (
+              <div
+                className={`flex-1 h-0.5 mx-2 transition-colors ${
+                  step > num ? "bg-primary" : "bg-slate-100"
+                }`}
+              />
+            )}
           </div>
-          <div className="flex flex-col gap-1.5">
-            <label className="text-label-md text-on-surface-variant font-medium">Last Name</label>
-            <Input name="lastName" placeholder="Enter last name (optional)" className="h-12 rounded-xl placeholder:text-slate-400 placeholder:font-normal" />
+        ))}
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        {/* STEP 1: Personal Information */}
+        {step === 1 && (
+          <div className="space-y-4 animate-in fade-in duration-300">
+            <h4 className="text-lg font-bold text-secondary flex items-center gap-2">
+              <span>Step 1:</span> Personal Information
+            </h4>
+            
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <span>👤</span> Full Name
+              </label>
+              <Input
+                required
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                placeholder="Enter your full name"
+                className="h-12 rounded-xl border border-slate-200 focus:border-primary px-4 placeholder:text-slate-400 font-medium"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <span>📱</span> Phone Number
+              </label>
+              <Input
+                required
+                type="tel"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                placeholder="10-digit mobile number"
+                className="h-12 rounded-xl border border-slate-200 focus:border-primary px-4 placeholder:text-slate-400 font-medium"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <span>📧</span> Email Address
+              </label>
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your.email@example.com"
+                className="h-12 rounded-xl border border-slate-200 focus:border-primary px-4 placeholder:text-slate-400 font-medium"
+              />
+            </div>
           </div>
+        )}
+
+        {/* STEP 2: Consultation Details */}
+        {step === 2 && (
+          <div className="space-y-4 animate-in fade-in duration-300">
+            <h4 className="text-lg font-bold text-secondary flex items-center gap-2">
+              <span>Step 2:</span> Consultation Details
+            </h4>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <span>👨‍⚕️</span> Select Doctor
+              </label>
+              <select
+                required
+                value={doctor}
+                onChange={(e) => setDoctor(e.target.value)}
+                className="w-full h-12 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary px-4 bg-white text-slate-800 text-sm font-medium outline-none"
+              >
+                <option value="">Choose your doctor</option>
+                <option value="Dr. Basil AP (Chief Homeopath)">Dr. Basil AP (Chief Homeopath)</option>
+                <option value="Dr. Sidrathul Munthaha (Women's Health Specialist)">Dr. Sidrathul Munthaha (Women's Health Specialist)</option>
+              </select>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <span>💻</span> Consultation Mode
+              </label>
+              <select
+                required
+                value={mode}
+                onChange={(e) => setMode(e.target.value)}
+                className="w-full h-12 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary px-4 bg-white text-slate-800 text-sm font-medium outline-none"
+              >
+                <option value="">Select mode</option>
+                <option value="In-Clinic Consultation">In-Clinic Consultation</option>
+                <option value="Online Video Consultation">Online Video Consultation</option>
+              </select>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <span>📍</span> Clinic Location
+              </label>
+              <select
+                required
+                value={location}
+                onChange={(e) => setLocation(e.target.value)}
+                className="w-full h-12 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary px-4 bg-white text-slate-800 text-sm font-medium outline-none"
+              >
+                <option value="">Choose location</option>
+                <option value="Main Clinic (JSS Shopping Mall, Manjeri)">Main Clinic (JSS Shopping Mall, Manjeri)</option>
+                <option value="Karaparambu Branch">Karaparambu Branch</option>
+              </select>
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <span>🩺</span> Reason for Visit
+              </label>
+              <select
+                required
+                value={reason}
+                onChange={(e) => setReason(e.target.value)}
+                className="w-full h-12 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary px-4 bg-white text-slate-800 text-sm font-medium outline-none"
+              >
+                <option value="">Select reason</option>
+                <option value="Respiratory Diseases">Respiratory Diseases</option>
+                <option value="Digestive System Diseases">Digestive System Diseases</option>
+                <option value="Fertility Care">Fertility Care</option>
+                <option value="Urinary Tract Care">Urinary Tract Care</option>
+                <option value="Children's Diseases">Children's Diseases</option>
+                <option value="Youth Care">Youth Care</option>
+                <option value="Skin Disorders">Skin Disorders</option>
+                <option value="Lifestyle Diseases">Lifestyle Diseases</option>
+                <option value="Mental Health Issues">Mental Health Issues</option>
+              </select>
+            </div>
+          </div>
+        )}
+
+        {/* STEP 3: Appointment Scheduling */}
+        {step === 3 && (
+          <div className="space-y-4 animate-in fade-in duration-300">
+            <h4 className="text-lg font-bold text-secondary flex items-center gap-2">
+              <span>Step 3:</span> Appointment Scheduling
+            </h4>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <span>📅</span> Preferred Date
+              </label>
+              <Input
+                required
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className="h-12 rounded-xl border border-slate-200 focus:border-primary px-4 font-medium"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <span>⏰</span> Preferred Time
+              </label>
+              <select
+                required
+                value={time}
+                onChange={(e) => setTime(e.target.value)}
+                className="w-full h-12 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary px-4 bg-white text-slate-800 text-sm font-medium outline-none"
+              >
+                <option value="">Select time</option>
+                <option value="Morning Slot (10:00 AM - 1:00 PM)">Morning Slot (10:00 AM - 1:00 PM)</option>
+                <option value="Afternoon Slot (3:30 PM - 5:30 PM)">Afternoon Slot (3:30 PM - 5:30 PM)</option>
+              </select>
+            </div>
+          </div>
+        )}
+
+        {/* STEP 4: Additional Information */}
+        {step === 4 && (
+          <div className="space-y-4 animate-in fade-in duration-300">
+            <h4 className="text-lg font-bold text-secondary flex items-center gap-2">
+              <span>Step 4:</span> Additional Information
+            </h4>
+
+            <div className="space-y-1.5">
+              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
+                <span>💬</span> Additional Message (Optional)
+              </label>
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                rows={5}
+                placeholder="Any specific symptoms, concerns, or additional information you'd like to share..."
+                className="w-full p-4 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-white text-slate-800 text-sm font-medium resize-none"
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Controls */}
+        <div className="flex gap-4 pt-4 border-t border-slate-100 justify-between items-center">
+          {step > 1 ? (
+            <Button
+              type="button"
+              variant="outline"
+              onClick={prevStep}
+              className="rounded-xl px-6 h-12 font-bold"
+            >
+              Back
+            </Button>
+          ) : (
+            <div />
+          )}
+
+          {step < 4 ? (
+            <Button
+              type="button"
+              onClick={nextStep}
+              className="bg-secondary text-white rounded-xl px-8 h-12 font-bold hover:bg-secondary/90 transition-all hover:scale-[1.02]"
+            >
+              Next Step
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="bg-primary text-white rounded-xl px-8 h-12 font-bold hover:bg-primary/95 transition-all hover:scale-[1.02] flex items-center gap-2"
+            >
+              {isLoading ? "Requesting..." : "Request Appointment"}
+              <span>→</span>
+            </Button>
+          )}
         </div>
-        <div className="flex flex-col gap-1.5">
-          <label className="text-label-md text-on-surface-variant font-medium">Phone Number</label>
-          <Input required name="phone" type="tel" placeholder="e.g. +91 98765 43210" className="h-12 rounded-xl placeholder:text-slate-400 placeholder:font-normal" />
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <label className="text-label-md text-on-surface-variant font-medium">Reason for Visit</label>
-          <Select required onValueChange={setReason} value={reason ?? ""}>
-            <SelectTrigger className="h-12 rounded-xl text-base text-left">
-              <SelectValue placeholder="Select reason for visit" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="General Consultation">General Consultation</SelectItem>
-              <SelectItem value="Vaccination">Vaccination</SelectItem>
-              <SelectItem value="Pediatric Checkup">Pediatric Checkup</SelectItem>
-              <SelectItem value="Lab Test / Blood Draw">Lab Test / Blood Draw</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <label className="text-label-md text-on-surface-variant font-medium">Preferred Doctor (Optional)</label>
-          <Select onValueChange={setDoctor} value={doctor ?? ""}>
-            <SelectTrigger className="h-12 rounded-xl text-base text-left">
-              <SelectValue placeholder="Any Doctor (First Available)" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Any Doctor (First Available)">Any Doctor (First Available)</SelectItem>
-              <SelectItem value="Dr. Anjali Sharma (Primary Care)">Dr. Anjali Sharma (Primary Care)</SelectItem>
-              <SelectItem value="Dr. Rajesh Varma (Family Medicine)">Dr. Rajesh Varma (Family Medicine)</SelectItem>
-              <SelectItem value="Dr. Priya Nair (Pediatrician)">Dr. Priya Nair (Pediatrician)</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div className="flex flex-col gap-1.5">
-          <label className="text-label-md text-on-surface-variant font-medium">Date Preferred</label>
-          <Input required name="date" type="date" className="h-12 rounded-xl placeholder:text-slate-400" />
-        </div>
-        <Button type="submit" size="lg" disabled={isLoading} className="w-full mt-4 h-14 rounded-xl text-lg font-bold shadow-lg">
-          {isLoading ? "Submitting..." : "Request Appointment"}
-        </Button>
+        
+        {step === 4 && (
+          <p className="text-[11px] text-slate-400 text-center leading-normal mt-2">
+            By submitting this form, you agree to receive appointment confirmations via WhatsApp and email
+          </p>
+        )}
       </form>
     </div>
   );

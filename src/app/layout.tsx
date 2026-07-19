@@ -3,6 +3,7 @@ import { Inter, Geist } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AosInit from "@/components/AosInit";
 import { cn } from "@/lib/utils";
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
@@ -12,8 +13,8 @@ const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CityHealth Clinic | Compassionate Local Healthcare",
-  description: "Experience personalized medical care at CityHealth Clinic.",
+  title: "Life Care Homeopathic Clinic | Professional Homeopathic Care in Malappuram",
+  description: "Professional homeopathic care with 15 years of excellence. Holistic treatments for respiratory, digestive, and fertility health in Manjeri, Kerala.",
 };
 
 export default function RootLayout({
@@ -29,6 +30,7 @@ export default function RootLayout({
       </head>
       {/* We apply the optimized Inter font directly to the body */}
       <body className={`${inter.className} bg-background text-on-surface antialiased`}>
+        <AosInit />
         <Navbar />
         <main>{children}</main>
         <Footer />

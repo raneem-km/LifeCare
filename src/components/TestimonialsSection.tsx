@@ -27,24 +27,31 @@ interface TestimonialsSectionProps {
 const initialTestimonials: Testimonial[] = [
   {
     id: "static-1",
-    name: "Arjun Mehta",
+    name: "Mohammed Shafi",
     rating: 5,
-    text: "The team at CityHealth is amazing. They always take the time to listen to my concerns during checkups, and I never feel rushed. It feels like family here.",
+    text: "The treatment at Life Care Homeo Clinic has been wonderful. They always take the time to listen to my complete health history during consultations, and I never feel rushed. It feels like true holistic healing here.",
     sub: "Patient since 2021"
   },
   {
     id: "static-2",
-    name: "Kavita Iyer",
+    name: "Fathima Nida",
     rating: 5,
-    text: "Finding a good pediatrician was hard until we met Dr. Priya at the clinic. She's gentle and makes every visit stress-free for both the kids and us.",
-    sub: "Parent of two"
+    text: "Finding safe, natural medicine for children was hard until we came here. The doctors are gentle, the sweet homeopathic medicines are easy to give, and it makes every visit stress-free for both the kids and us.",
+    sub: "Parent of two children"
   },
   {
     id: "static-3",
-    name: "Suresh Kumar",
+    name: "Harikrishnan M.",
     rating: 5,
-    text: "The front desk staff are incredibly helpful. I went in for a walk-in consultation and the process was smooth with no hidden costs. A reliable local clinic.",
+    text: "The doctors here take a very detailed, patient-centric approach. I went in for a chronic issue and their constitutional remedies have made a huge difference in my daily life. A highly reliable and welcoming local clinic.",
     sub: "Patient since 2019"
+  },
+  {
+    id: "static-4",
+    name: "Shihabudheen P.",
+    rating: 5,
+    text: "Excellent service! The practitioners are highly knowledgeable in homeopathy, the staff is friendly, and the clinic is clean and peaceful. Booking an appointment was quick and easy.",
+    sub: "7/11/2026 • Verified Patient"
   }
 ];
 
@@ -77,20 +84,26 @@ export default function TestimonialsSection({ initialDbReviews = [] }: Testimoni
   };
 
   return (
-    <section className="py-12 md:py-2xl bg-primary text-on-primary">
+    <section className="py-20 bg-slate-50 border-y border-slate-200/50 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop">
-        <div className="text-center mb-xl">
-          <h2 className="text-headline-md font-bold mb-4 text-white">What Our Patients Say</h2>
-          <div className="w-20 h-1 bg-secondary-container mx-auto animate-pulse"></div>
+        <div className="text-center mb-12">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-secondary-container text-on-secondary-container text-xs font-bold uppercase tracking-wider mb-3">
+            Reviews
+          </span>
+          <h2 className="text-headline-md font-bold mb-4 text-secondary">Patient Success Stories</h2>
+          <p className="text-slate-500 max-w-2xl mx-auto mb-4">
+            Real stories from patients who found healing through our natural homeopathic treatments
+          </p>
+          <div className="w-20 h-1 bg-primary mx-auto"></div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter items-stretch">
           {testimonials.map((t) => (
             <div 
               key={t.id} 
-              className="bg-primary-container p-8 rounded-3xl border border-white/10 hover:bg-primary-container/80 transition-all duration-300 flex flex-col justify-between shadow-soft hover:shadow-lg hover:-translate-y-1 animate-in fade-in duration-500"
+              className="bg-white p-8 rounded-3xl border border-slate-100 flex flex-col justify-between shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 animate-in fade-in duration-500"
             >
               <div>
-                <div className="flex text-secondary-fixed mb-4">
+                <div className="flex text-amber-400 mb-4">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <span 
                       key={i} 
@@ -101,15 +114,15 @@ export default function TestimonialsSection({ initialDbReviews = [] }: Testimoni
                     </span>
                   ))}
                 </div>
-                <p className="italic mb-8 text-body-lg text-primary-fixed leading-relaxed">&quot;{t.text}&quot;</p>
+                <p className="italic mb-8 text-body-md text-slate-600 leading-relaxed">&quot;{t.text}&quot;</p>
               </div>
-              <div className="flex items-center gap-4 border-t border-white/5 pt-4">
-                <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center font-bold text-secondary-fixed uppercase text-lg border border-secondary/35">
+              <div className="flex items-center gap-4 border-t border-slate-100 pt-4">
+                <div className="w-12 h-12 rounded-full bg-primary/15 flex items-center justify-center font-bold text-primary uppercase text-lg border border-primary/20">
                   {t.name.charAt(0)}
                 </div>
                 <div>
-                  <p className="font-bold text-white text-base">{t.name}</p>
-                  <p className="text-xs opacity-70 font-medium">{t.sub}</p>
+                  <p className="font-bold text-secondary text-base">{t.name}</p>
+                  <p className="text-xs text-slate-400 font-medium">{t.sub}</p>
                 </div>
               </div>
             </div>

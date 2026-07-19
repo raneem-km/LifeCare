@@ -1,0 +1,1 @@
+const { PrismaClient } = require('@prisma/client'); const prisma = new PrismaClient(); async function main() { await prisma.review.deleteMany({ where: { name: { contains: 'john doe' } } }); console.log('Deleted John Doe review'); } main().finally(() => prisma.$disconnect());
