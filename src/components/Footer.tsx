@@ -61,8 +61,8 @@ export default function Footer() {
         <div>
           <h4 className="font-bold text-secondary mb-6">Support & Timings</h4>
           <ul className="space-y-3 text-slate-500 text-sm">
-            <li><Link className="hover:text-primary transition-colors" href="#">Privacy Policy</Link></li>
-            <li><Link className="hover:text-primary transition-colors" href="#">Terms of Service</Link></li>
+            <li><Link className="hover:text-primary transition-colors" href="/privacy-policy">Privacy Policy</Link></li>
+            <li><Link className="hover:text-primary transition-colors" href="/terms-of-service">Terms of Service</Link></li>
             <li className="pt-2 font-semibold text-secondary">Working Hours:</li>
             <li className="text-xs">
               Mon-Thu: 10am-1pm, 3:30-5:30pm<br/>
