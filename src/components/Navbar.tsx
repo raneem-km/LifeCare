@@ -39,7 +39,7 @@ export default function Navbar() {
           {/* Brand/Logo */}
           <Link href="/" className="flex items-center gap-3 hover:opacity-95 transition-opacity group">
             <div className="w-12 h-12 rounded-xl overflow-hidden shadow-sm border border-slate-100 bg-white flex items-center justify-center relative">
-              <Image src="/images/logo.png" alt="Life Care Logo" fill className="object-contain" />
+              <Image src="/images/logo.png" alt="Life Care Logo" fill sizes="48px" className="object-contain" />
             </div>
             <div className="flex flex-col">
               <span className="font-display-lg text-lg font-extrabold text-secondary tracking-tight leading-tight">
