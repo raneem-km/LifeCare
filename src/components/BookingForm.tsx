@@ -80,14 +80,16 @@ export default function BookingForm() {
 
   if (isSubmitted) {
     return (
-      <div className="w-full bg-white p-8 rounded-3xl border border-slate-200/60 shadow-xl text-center h-full flex flex-col justify-center items-center">
-        <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-6 text-primary">
-          <span className="material-symbols-outlined text-4xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
+      <div className="w-full bg-white p-8 rounded-3xl border border-slate-200/60 shadow-xl text-center h-full flex flex-col justify-center items-center space-y-4">
+        <div className="w-14 h-14 bg-emerald-50 rounded-full flex items-center justify-center text-emerald-500 mx-auto">
+          <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
         </div>
-        <h3 className="text-2xl font-bold text-secondary mb-2">Request Submitted!</h3>
-        <p className="text-slate-500 mb-6 max-w-sm">Thank you. Our front desk will call you shortly via WhatsApp or phone call to confirm your final slot timing.</p>
-        <Button variant="outline" className="rounded-xl px-6 py-2" onClick={resetForm}>
-          Book another visit
+        <h3 className="text-xl font-extrabold text-secondary">Appointment Requested!</h3>
+        <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
+          Thank you! Our front desk will contact you shortly via WhatsApp or phone call to confirm your final appointment slot.
+        </p>
+        <Button variant="outline" className="rounded-xl px-6 py-2.5 text-xs font-bold" onClick={resetForm}>
+          Book Another Appointment
         </Button>
       </div>
     );
