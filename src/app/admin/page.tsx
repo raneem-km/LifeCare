@@ -1,7 +1,5 @@
 import { getBookings, getReviews } from "@/app/actions";
 import AdminDashboardClient from "./AdminDashboardClient";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Admin Dashboard | Life Care Homeopathic Clinic",
@@ -16,23 +14,17 @@ export default async function AdminPage() {
   const initialReviews = await getReviews();
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800">
-      <Navbar />
-
-      <main className="flex-grow max-w-7xl mx-auto px-4 md:px-8 py-10 w-full">
-        <AdminDashboardClient 
-          initialBookings={initialBookings.map(b => ({
-            ...b,
-            createdAt: b.createdAt.toISOString()
-          }))}
-          initialReviews={initialReviews.map(r => ({
-            ...r,
-            createdAt: r.createdAt.toISOString()
-          }))}
-        />
-      </main>
-
-      <Footer />
+    <div className="py-10 max-w-7xl mx-auto px-4 md:px-8 w-full">
+      <AdminDashboardClient 
+        initialBookings={initialBookings.map(b => ({
+          ...b,
+          createdAt: b.createdAt.toISOString()
+        }))}
+        initialReviews={initialReviews.map(r => ({
+          ...r,
+          createdAt: r.createdAt.toISOString()
+        }))}
+      />
     </div>
   );
 }

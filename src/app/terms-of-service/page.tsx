@@ -1,6 +1,4 @@
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 
 export const metadata = {
   title: "Terms of Service | Life Care Homeopathic Clinic",
@@ -9,11 +7,8 @@ export const metadata = {
 
 export default function TermsOfServicePage() {
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800">
-      <Navbar />
-
-      <main className="flex-grow max-w-4xl mx-auto px-4 md:px-8 py-12 md:py-16">
-        <div className="bg-white p-8 md:p-12 rounded-3xl border border-slate-200/80 shadow-sm space-y-8">
+    <div className="max-w-4xl mx-auto px-4 md:px-8 py-12 md:py-16">
+      <div className="bg-white p-8 md:p-12 rounded-3xl border border-slate-200/80 shadow-sm space-y-8">
           <div>
             <span className="text-xs font-bold text-secondary uppercase tracking-widest bg-secondary/10 px-3 py-1 rounded-full inline-block mb-3">
               Legal Documentation
@@ -97,9 +92,6 @@ export default function TermsOfServicePage() {
             </Link>
           </div>
         </div>
-      </main>
-
-      <Footer />
     </div>
   );
 }
