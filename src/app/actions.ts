@@ -23,7 +23,7 @@ export interface ReviewInput {
  */
 export async function createBooking(data: BookingInput) {
   try {
-    if (!process.env.DATABASE_URL) {
+    if (!process.env.DATABASE_URL || !db) {
       console.warn("DATABASE_URL is not set");
       return { success: false, error: "Database not configured" };
     }
@@ -49,7 +49,7 @@ export async function createBooking(data: BookingInput) {
  */
 export async function submitReview(data: ReviewInput) {
   try {
-    if (!process.env.DATABASE_URL) {
+    if (!process.env.DATABASE_URL || !db) {
       console.warn("DATABASE_URL is not set");
       return { success: false, error: "Database not configured" };
     }
@@ -74,7 +74,7 @@ export async function submitReview(data: ReviewInput) {
  */
 export async function getReviews() {
   try {
-    if (!process.env.DATABASE_URL) {
+    if (!process.env.DATABASE_URL || !db) {
       console.warn("DATABASE_URL is not set");
       return [];
     }
