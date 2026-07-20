@@ -551,7 +551,7 @@ export default function AdminDashboardClient({
       {/* MODAL 1: View Patient Details Popup */}
       {selectedBooking && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 relative border border-slate-100">
+          <div className="bg-white rounded-3xl w-[92%] max-w-[550px] sm:w-[550px] p-6 md:p-8 shadow-2xl space-y-6 relative border border-slate-100 flex-shrink-0 mx-auto">
             <button
               onClick={() => setSelectedBooking(null)}
               className="absolute right-5 top-5 w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 flex items-center justify-center border-none cursor-pointer"
@@ -632,7 +632,7 @@ export default function AdminDashboardClient({
       {/* MODAL 2: Add Manual Entry Appointment Popup */}
       {isAddModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl space-y-6 relative border border-slate-100 max-h-[90vh] overflow-y-auto">
+          <div className="bg-white rounded-3xl w-[92%] max-w-[550px] sm:w-[550px] p-6 md:p-8 shadow-2xl space-y-6 relative border border-slate-100 flex-shrink-0 mx-auto max-h-[90vh] overflow-y-auto">
             <button
               onClick={() => setIsAddModalOpen(false)}
               className="absolute right-5 top-5 w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 flex items-center justify-center border-none cursor-pointer"
