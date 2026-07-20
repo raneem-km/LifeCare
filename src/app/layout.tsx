@@ -15,6 +15,11 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Life Care Homeopathic Clinic | Professional Homeopathic Care in Malappuram",
   description: "Professional homeopathic care with 15 years of excellence. Holistic treatments for respiratory, digestive, and fertility health in Manjeri, Kerala.",
+  icons: {
+    icon: "/images/logo.png",
+    shortcut: "/images/logo.png",
+    apple: "/images/logo.png",
+  },
 };
 
 export default function RootLayout({
