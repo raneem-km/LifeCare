@@ -9,23 +9,29 @@ interface ReviewFormProps {
 export default function ReviewForm({ onAddReview }: ReviewFormProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [rating, setRating] = useState(5);
   const [hoverRating, setHoverRating] = useState<number | null>(null);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const name = formData.get("name") as string;
     const review = formData.get("review") as string;
     
     if (name && review) {
-      onAddReview(name, rating, review);
-      setSubmitted(true);
-      setTimeout(() => {
-        setSubmitted(false);
-        setIsOpen(false);
-        setRating(5);
-      }, 3000);
+      setIsSubmitting(true);
+      try {
+        await onAddReview(name, rating, review);
+        setSubmitted(true);
+        setTimeout(() => {
+          setSubmitted(false);
+          setIsOpen(false);
+          setRating(5);
+        }, 3000);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
   };
 
@@ -107,9 +113,10 @@ export default function ReviewForm({ onAddReview }: ReviewFormProps) {
               </button>
               <button 
                 type="submit"
-                className="bg-primary text-white px-10 py-4 rounded-2xl font-bold text-lg hover:bg-primary/95 transition-all hover:scale-105 active:scale-95 shadow-lg cursor-pointer"
+                disabled={isSubmitting}
+                className="bg-primary text-white px-10 py-4 rounded-2xl font-bold text-lg hover:bg-primary/95 transition-all hover:scale-105 active:scale-95 shadow-lg cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                Submit Review
+                {isSubmitting ? "Submitting..." : "Submit Review"}
               </button>
             </div>
           </form>
