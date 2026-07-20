@@ -239,7 +239,7 @@ export default function AdminDashboardClient({
   };
 
   return (
-    <div className="space-y-8 print:p-0">
+    <div className="w-full space-y-8 print:p-0">
       {/* Header Banner (Hidden on print) */}
       <div className="bg-gradient-to-r from-secondary to-primary text-white p-8 md:p-10 rounded-3xl shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6 print:hidden">
         <div>

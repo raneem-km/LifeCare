@@ -14,7 +14,7 @@ export default async function AdminPage() {
   const initialReviews = await getReviews();
 
   return (
-    <div className="py-10 max-w-7xl mx-auto px-4 md:px-8 w-full">
+    <div className="w-full max-w-[1500px] mx-auto px-4 sm:px-6 lg:px-10 py-8">
       <AdminDashboardClient 
         initialBookings={initialBookings.map(b => ({
           ...b,
