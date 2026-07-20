@@ -18,21 +18,55 @@ export default function BookingForm() {
   const [mode, setMode] = useState("");
   const [location, setLocation] = useState("");
   const [reason, setReason] = useState("");
+  const [symptoms, setSymptoms] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
-  const [message, setMessage] = useState("");
+
+  // Validation Error States
+  const [phoneError, setPhoneError] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
+
+  // Handle Phone Change (Numbers Only & 10 Digits Max)
+  const handlePhoneChange = (val: string) => {
+    const numericOnly = val.replace(/\D/g, "").slice(0, 10);
+    setPhone(numericOnly);
+    if (numericOnly.length > 0 && numericOnly.length < 10) {
+      setPhoneError("Mobile number must be exactly 10 digits.");
+    } else {
+      setPhoneError(null);
+    }
+  };
+
+  // Handle Email Change
+  const handleEmailChange = (val: string) => {
+    setEmail(val);
+    if (val.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val.trim())) {
+      setEmailError("Please enter a valid email address.");
+    } else {
+      setEmailError(null);
+    }
+  };
 
   const nextStep = () => {
-    if (step === 1 && (!fullName || !phone)) {
-      alert("Please fill in your name and phone number.");
-      return;
+    if (step === 1) {
+      if (!fullName.trim()) {
+        alert("Please enter your full name.");
+        return;
+      }
+      if (phone.length !== 10) {
+        setPhoneError("Mobile number must be exactly 10 digits.");
+        return;
+      }
+      if (email.trim() && emailError) {
+        return;
+      }
     }
     if (step === 2 && (!doctor || !mode || !location || !reason)) {
-      alert("Please select doctor, mode, location, and reason.");
+      alert("Please select doctor, mode, location, and reason for visit.");
       return;
     }
     if (step === 3 && (!date || !time)) {
-      alert("Please select date and preferred time slot.");
+      alert("Please select appointment date and preferred time slot.");
       return;
     }
     setStep((prev) => prev + 1);
@@ -42,23 +76,37 @@ export default function BookingForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
 
-    // Combine step data into database columns safely
-    const combinedReason = `Reason: ${reason} [Mode: ${mode} | Location: ${location} | Time: ${time} | Email: ${email || "None"}${message ? ` | Message: ${message}` : ""}`;
+    if (phone.length !== 10) {
+      setPhoneError("Mobile number must be exactly 10 digits.");
+      setStep(1);
+      return;
+    }
+
+    if (email.trim() && emailError) {
+      setStep(1);
+      return;
+    }
+
+    setIsLoading(true);
 
     const res = await createBooking({
       firstName: fullName,
       phone: phone,
-      reason: combinedReason,
+      email: email.trim() || undefined,
+      reason: reason,
+      symptoms: symptoms.trim() || undefined,
       doctor: doctor,
+      mode: mode,
+      location: location,
+      time: time,
       date: date,
     });
 
     if (res.success) {
       setIsSubmitted(true);
     } else {
-      alert("Booking request failed. Please try again.");
+      alert(res.error || "Booking request failed. Please check your inputs.");
     }
     setIsLoading(false);
   };
@@ -71,9 +119,11 @@ export default function BookingForm() {
     setMode("");
     setLocation("");
     setReason("");
+    setSymptoms("");
     setDate("");
     setTime("");
-    setMessage("");
+    setPhoneError(null);
+    setEmailError(null);
     setStep(1);
     setIsSubmitted(false);
   };
@@ -129,7 +179,7 @@ export default function BookingForm() {
             
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                <span>👤</span> Full Name
+                <span>👤</span> Full Name *
               </label>
               <Input
                 required
@@ -141,31 +191,49 @@ export default function BookingForm() {
               />
             </div>
 
+            {/* Phone Number with 10-Digit Numeric Validation */}
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                <span>📱</span> Phone Number
+                <span>📱</span> Mobile Number (10 Digits) *
               </label>
               <Input
                 required
                 type="tel"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                placeholder="10-digit mobile number"
-                className="h-12 rounded-xl border border-slate-200 focus:border-primary px-4 placeholder:text-slate-400 font-medium"
+                onChange={(e) => handlePhoneChange(e.target.value)}
+                placeholder="10-digit mobile number (numbers only)"
+                className={`h-12 rounded-xl border px-4 placeholder:text-slate-400 font-medium ${
+                  phoneError ? "border-rose-500 bg-rose-50/30" : "border-slate-200 focus:border-primary"
+                }`}
               />
+              {phoneError && (
+                <p className="text-xs font-bold text-rose-600 flex items-center gap-1 mt-1">
+                  <span className="material-symbols-outlined text-sm">error</span>
+                  {phoneError}
+                </p>
+              )}
             </div>
 
+            {/* Email Address with Regex Validation */}
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                <span>📧</span> Email Address
+                <span>📧</span> Email Address (Optional)
               </label>
               <Input
                 type="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => handleEmailChange(e.target.value)}
                 placeholder="your.email@example.com"
-                className="h-12 rounded-xl border border-slate-200 focus:border-primary px-4 placeholder:text-slate-400 font-medium"
+                className={`h-12 rounded-xl border px-4 placeholder:text-slate-400 font-medium ${
+                  emailError ? "border-rose-500 bg-rose-50/30" : "border-slate-200 focus:border-primary"
+                }`}
               />
+              {emailError && (
+                <p className="text-xs font-bold text-rose-600 flex items-center gap-1 mt-1">
+                  <span className="material-symbols-outlined text-sm">error</span>
+                  {emailError}
+                </p>
+              )}
             </div>
           </div>
         )}
@@ -179,7 +247,7 @@ export default function BookingForm() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                <span>👨‍⚕️</span> Select Doctor
+                <span>👨‍⚕️</span> Select Doctor *
               </label>
               <select
                 required
@@ -195,7 +263,7 @@ export default function BookingForm() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                <span>💻</span> Consultation Mode
+                <span>💻</span> Consultation Mode *
               </label>
               <select
                 required
@@ -211,7 +279,7 @@ export default function BookingForm() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                <span>📍</span> Clinic Location
+                <span>📍</span> Clinic Location *
               </label>
               <select
                 required
@@ -227,7 +295,7 @@ export default function BookingForm() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                <span>🩺</span> Reason for Visit
+                <span>🩺</span> Primary Specialty / Category *
               </label>
               <select
                 required
@@ -235,7 +303,7 @@ export default function BookingForm() {
                 onChange={(e) => setReason(e.target.value)}
                 className="w-full h-12 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary px-4 bg-white text-slate-800 text-sm font-medium outline-none"
               >
-                <option value="">Select reason</option>
+                <option value="">Select specialty category</option>
                 <option value="Respiratory Diseases">Respiratory Diseases</option>
                 <option value="Digestive System Diseases">Digestive System Diseases</option>
                 <option value="Fertility Care">Fertility Care</option>
@@ -259,7 +327,7 @@ export default function BookingForm() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                <span>📅</span> Preferred Date
+                <span>📅</span> Preferred Date *
               </label>
               <Input
                 required
@@ -272,7 +340,7 @@ export default function BookingForm() {
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                <span>⏰</span> Preferred Time
+                <span>⏰</span> Preferred Time Slot *
               </label>
               <select
                 required
@@ -280,7 +348,7 @@ export default function BookingForm() {
                 onChange={(e) => setTime(e.target.value)}
                 className="w-full h-12 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary px-4 bg-white text-slate-800 text-sm font-medium outline-none"
               >
-                <option value="">Select time</option>
+                <option value="">Select time slot</option>
                 <option value="Morning Slot (10:00 AM - 1:00 PM)">Morning Slot (10:00 AM - 1:00 PM)</option>
                 <option value="Afternoon Slot (3:30 PM - 5:30 PM)">Afternoon Slot (3:30 PM - 5:30 PM)</option>
               </select>
@@ -288,23 +356,23 @@ export default function BookingForm() {
           </div>
         )}
 
-        {/* STEP 4: Additional Information */}
+        {/* STEP 4: Symptoms & Additional Information */}
         {step === 4 && (
           <div className="space-y-4 animate-in fade-in duration-300">
             <h4 className="text-lg font-bold text-secondary flex items-center gap-2">
-              <span>Step 4:</span> Additional Information
+              <span>Step 4:</span> Reason for Visit / Symptoms
             </h4>
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                <span>💬</span> Additional Message (Optional)
+                <span>💬</span> Reason for Visit / Symptoms
               </label>
               <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
+                value={symptoms}
+                onChange={(e) => setSymptoms(e.target.value)}
                 rows={5}
-                placeholder="Any specific symptoms, concerns, or additional information you'd like to share..."
-                className="w-full p-4 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-white text-slate-800 text-sm font-medium resize-none"
+                placeholder="Describe your specific symptoms, health issues, or duration of illness..."
+                className="w-full p-4 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-white text-slate-800 text-sm font-medium resize-none placeholder:text-slate-400"
               />
             </div>
           </div>
@@ -339,7 +407,7 @@ export default function BookingForm() {
               disabled={isLoading}
               className="bg-primary text-white rounded-xl px-8 h-12 font-bold hover:bg-primary/95 transition-all hover:scale-[1.02] flex items-center gap-2"
             >
-              {isLoading ? "Requesting..." : "Request Appointment"}
+              {isLoading ? "Submitting..." : "Confirm & Request Visit"}
               <span>→</span>
             </Button>
           )}
@@ -347,7 +415,7 @@ export default function BookingForm() {
         
         {step === 4 && (
           <p className="text-[11px] text-slate-400 text-center leading-normal mt-2">
-            By submitting this form, you agree to receive appointment confirmations via WhatsApp and email
+            By submitting this form, your request will be reviewed by clinic staff for slot confirmation.
           </p>
         )}
       </form>
