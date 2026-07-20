@@ -88,3 +88,62 @@ export async function getReviews() {
     return [];
   }
 }
+
+/**
+ * Fetches all patient bookings from the database
+ */
+export async function getBookings() {
+  try {
+    if (!process.env.DATABASE_URL || !db) {
+      console.warn("DATABASE_URL is not set");
+      return [];
+    }
+    return await db.booking.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  } catch (error) {
+    console.error("Failed to fetch bookings:", error);
+    return [];
+  }
+}
+
+/**
+ * Deletes a booking by ID
+ */
+export async function deleteBooking(id: number) {
+  try {
+    if (!process.env.DATABASE_URL || !db) {
+      return { success: false, error: "Database not configured" };
+    }
+    await db.booking.delete({
+      where: { id },
+    });
+    revalidatePath("/admin");
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to delete booking:", error);
+    return { success: false, error: "Failed to delete booking" };
+  }
+}
+
+/**
+ * Deletes a review by ID
+ */
+export async function deleteReview(id: number) {
+  try {
+    if (!process.env.DATABASE_URL || !db) {
+      return { success: false, error: "Database not configured" };
+    }
+    await db.review.delete({
+      where: { id },
+    });
+    revalidatePath("/");
+    revalidatePath("/admin");
+    return { success: true };
+  } catch (error) {
+    console.error("Failed to delete review:", error);
+    return { success: false, error: "Failed to delete review" };
+  }
+}
