@@ -91,9 +91,7 @@ export default function TestimonialsSection({ initialDbReviews = [] }: Testimoni
             Reviews
           </span>
           <h2 className="text-headline-md font-bold mb-4 text-secondary">Patient Success Stories</h2>
-          <p className="text-slate-500 max-w-2xl mx-auto mb-4">
-            Real stories from patients who found healing through our natural homeopathic treatments
-          </p>
+          <p className="text-slate-500 max-w-none mx-auto mb-4 whitespace-nowrap text-sm sm:text-base">Real stories from patients who found healing through our natural homeopathic treatments</p>
           <div className="w-20 h-1 bg-primary mx-auto"></div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter items-stretch">
