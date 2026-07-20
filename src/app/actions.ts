@@ -23,6 +23,10 @@ export interface ReviewInput {
  */
 export async function createBooking(data: BookingInput) {
   try {
+    if (!process.env.DATABASE_URL) {
+      console.warn("DATABASE_URL is not set");
+      return { success: false, error: "Database not configured" };
+    }
     const booking = await db.booking.create({
       data: {
         firstName: data.firstName,
@@ -45,6 +49,10 @@ export async function createBooking(data: BookingInput) {
  */
 export async function submitReview(data: ReviewInput) {
   try {
+    if (!process.env.DATABASE_URL) {
+      console.warn("DATABASE_URL is not set");
+      return { success: false, error: "Database not configured" };
+    }
     const review = await db.review.create({
       data: {
         name: data.name,
@@ -66,6 +74,10 @@ export async function submitReview(data: ReviewInput) {
  */
 export async function getReviews() {
   try {
+    if (!process.env.DATABASE_URL) {
+      console.warn("DATABASE_URL is not set");
+      return [];
+    }
     return await db.review.findMany({
       orderBy: {
         createdAt: "desc",
