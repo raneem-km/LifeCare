@@ -85,6 +85,11 @@ export default function AdminDashboardClient({
     ? (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1)
     : "5.0";
 
+  const handleLogout = async () => {
+    await fetch("/api/auth/logout", { method: "POST" });
+    window.location.href = "/login";
+  };
+
   return (
     <div className="space-y-8">
       {/* Header Banner */}
@@ -96,12 +101,21 @@ export default function AdminDashboardClient({
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">Patient Management Portal</h1>
           <p className="text-white/80 text-sm mt-1">Real-time view of patient appointment bookings and clinic reviews.</p>
         </div>
-        <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md p-2.5 rounded-2xl border border-white/20">
-          <span className="material-symbols-outlined text-primary text-3xl">verified_user</span>
-          <div>
-            <p className="font-bold text-sm leading-tight">Database Connected</p>
-            <p className="text-xs text-white/70">Neon PostgreSQL Live</p>
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <div className="flex items-center gap-3 bg-white/10 backdrop-blur-md p-2.5 rounded-2xl border border-white/20">
+            <span className="material-symbols-outlined text-primary text-3xl">verified_user</span>
+            <div>
+              <p className="font-bold text-sm leading-tight">Database Connected</p>
+              <p className="text-xs text-white/70">Neon PostgreSQL Live</p>
+            </div>
           </div>
+          <button
+            onClick={handleLogout}
+            className="px-4 py-2.5 bg-rose-500 hover:bg-rose-600 text-white rounded-2xl font-bold text-xs shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer border-none outline-none"
+          >
+            <span className="material-symbols-outlined text-base">logout</span>
+            Sign Out
+          </button>
         </div>
       </div>
 
