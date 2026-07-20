@@ -22,9 +22,10 @@ export default function BookingForm() {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
 
-  // Validation Error States
+  // Validation Error & Server Error States
   const [phoneError, setPhoneError] = useState<string | null>(null);
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [serverError, setServerError] = useState<string | null>(null);
 
   // Handle Phone Change (Numbers Only & 10 Digits Max)
   const handlePhoneChange = (val: string) => {
@@ -100,24 +101,29 @@ export default function BookingForm() {
     }
 
     setIsLoading(true);
+    setServerError(null);
 
-    const res = await createBooking({
-      firstName: fullName,
-      phone: phone,
-      email: email.trim() || undefined,
-      reason: reason,
-      symptoms: symptoms.trim(),
-      doctor: doctor,
-      mode: mode,
-      location: location,
-      time: time,
-      date: date,
-    });
+    try {
+      const res = await createBooking({
+        firstName: fullName,
+        phone: phone,
+        email: email.trim() || undefined,
+        reason: reason,
+        symptoms: symptoms.trim(),
+        doctor: doctor,
+        mode: mode,
+        location: location,
+        time: time,
+        date: date,
+      });
 
-    if (res.success) {
-      setIsSubmitted(true);
-    } else {
-      alert(res.error || "Booking request failed. Please check your inputs.");
+      if (res.success) {
+        setIsSubmitted(true);
+      } else {
+        setServerError(res.error || "Booking request failed. Please check your network or call clinic directly.");
+      }
+    } catch {
+      setServerError("Unable to send request due to network issue. Please call us directly at +91 77366 43050.");
     }
     setIsLoading(false);
   };
@@ -135,6 +141,7 @@ export default function BookingForm() {
     setTime("");
     setPhoneError(null);
     setEmailError(null);
+    setServerError(null);
     setStep(1);
     setIsSubmitted(false);
   };
@@ -146,7 +153,7 @@ export default function BookingForm() {
           <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
         </div>
         <h3 className="text-xl font-extrabold text-secondary">Appointment Requested!</h3>
-        <p className="text-slate-600 text-sm max-w-md mx-auto leading-relaxed">
+        <p className="text-slate-600 text-xs sm:text-sm max-w-xl mx-auto leading-snug">
           Thank you! Our front desk will contact you shortly via WhatsApp or phone call to confirm your final appointment slot.
         </p>
         <Button variant="outline" className="rounded-xl px-6 py-2.5 text-xs font-bold" onClick={resetForm}>
@@ -157,7 +164,25 @@ export default function BookingForm() {
   }
 
   return (
-    <div className="w-full bg-white p-8 rounded-3xl border border-slate-200/60 shadow-xl">
+    <div className="w-full bg-white p-8 rounded-3xl border border-slate-200/60 shadow-xl space-y-6">
+      {/* Server Error Alert Banner */}
+      {serverError && (
+        <div className="p-4 bg-rose-50 border border-rose-200/80 rounded-2xl flex items-start gap-3 text-rose-800 text-xs animate-in fade-in duration-200">
+          <span className="material-symbols-outlined text-xl text-rose-600 flex-shrink-0">error</span>
+          <div className="flex-1 space-y-1">
+            <p className="font-bold text-rose-900 text-sm">Booking Request Failed</p>
+            <p className="leading-relaxed">{serverError}</p>
+            <p className="text-[11px] text-rose-600 pt-1">You can also call or WhatsApp us directly at: <a href="tel:+917736643050" className="underline font-bold">+91 77366 43050</a></p>
+          </div>
+          <button
+            type="button"
+            onClick={() => setServerError(null)}
+            className="text-rose-400 hover:text-rose-700 font-bold text-base bg-transparent border-none cursor-pointer p-0"
+          >
+            ✕
+          </button>
+        </div>
+      )}
       {/* Progress Indicators */}
       <div className="flex justify-between items-center mb-8">
         {[1, 2, 3, 4].map((num) => (
