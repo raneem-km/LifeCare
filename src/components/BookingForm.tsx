@@ -363,17 +363,50 @@ export default function BookingForm() {
               <span>Step 4:</span> Reason for Visit / Symptoms
             </h4>
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                <span>💬</span> Reason for Visit / Symptoms
-              </label>
-              <textarea
-                value={symptoms}
-                onChange={(e) => setSymptoms(e.target.value)}
-                rows={5}
-                placeholder="Describe your specific symptoms, health issues, or duration of illness..."
-                className="w-full p-4 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none bg-white text-slate-800 text-sm font-medium resize-none placeholder:text-slate-400"
-              />
+            <div className="flex flex-col gap-4">
+              {/* Broad Category Dropdown */}
+              <div>
+                <label htmlFor="category" className="block text-sm font-semibold text-gray-700 mb-1">
+                  What kind of care do you need?
+                </label>
+                <select 
+                  id="category"
+                  name="category"
+                  required
+                  value={reason}
+                  onChange={(e) => setReason(e.target.value)}
+                  className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all"
+                >
+                  <option value="">Select specialty category</option>
+                  <option value="Respiratory Diseases">Respiratory Diseases</option>
+                  <option value="Digestive System Diseases">Digestive System Diseases</option>
+                  <option value="Fertility Care">Fertility Care</option>
+                  <option value="Urinary Tract Care">Urinary Tract Care</option>
+                  <option value="Children's Diseases">Children's Diseases</option>
+                  <option value="Youth Care">Youth Care</option>
+                  <option value="Skin Disorders">Skin Disorders</option>
+                  <option value="Lifestyle Diseases">Lifestyle Diseases</option>
+                  <option value="Mental Health Issues">Mental Health Issues</option>
+                  <option value="Other">Other / Not Sure</option>
+                </select>
+              </div>
+
+              {/* Custom Typed Issue (Text Area) */}
+              <div>
+                <label htmlFor="symptoms" className="block text-sm font-semibold text-gray-700 mb-1">
+                  Please describe your specific issue <span className="text-red-500">*</span>
+                </label>
+                <textarea
+                  id="symptoms"
+                  name="symptoms"
+                  rows={3}
+                  required
+                  value={symptoms}
+                  onChange={(e) => setSymptoms(e.target.value)}
+                  placeholder="Type your symptoms, duration of illness, or reason for visit here..."
+                  className="w-full bg-white border border-gray-300 rounded-xl px-4 py-3 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all resize-y"
+                ></textarea>
+              </div>
             </div>
           </div>
         )}
