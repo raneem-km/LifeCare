@@ -388,8 +388,15 @@ export default function AdminDashboardClient({
       </div>
 
       {/* Printable Header */}
-      <div className="hidden print:block mb-6 text-center space-y-1">
-        <h2 className="text-2xl font-bold text-slate-900">Life Care Homeopathic Clinic</h2>
+      <div className="hidden print:flex print:flex-col print:items-center mb-6 text-center space-y-2">
+        <div className="flex items-center justify-center gap-3">
+          <img
+            src="/images/logo.png"
+            alt="Life Care Homeopathic Clinic Logo"
+            className="w-12 h-12 object-contain"
+          />
+          <h2 className="text-2xl font-bold text-slate-900">Life Care Homeopathic Clinic</h2>
+        </div>
         <p className="text-sm font-medium text-slate-600">Patient Appointment Schedule — Printed on {new Date().toLocaleDateString()}</p>
       </div>
 
