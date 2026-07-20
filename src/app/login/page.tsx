@@ -42,17 +42,17 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-[85vh] flex items-center justify-center px-4 py-12 bg-slate-50">
-      <div className="w-full max-w-md bg-white p-8 md:p-10 rounded-3xl border border-slate-200/80 shadow-xl space-y-6">
+    <div className="min-h-[80vh] w-full flex items-center justify-center px-4 py-12 bg-slate-50">
+      <div className="w-full max-w-[440px] bg-white p-8 md:p-10 rounded-3xl border border-slate-200/80 shadow-xl space-y-6 flex-shrink-0">
         {/* Clinic Header */}
         <div className="text-center space-y-3">
-          <div className="w-16 h-16 mx-auto relative mb-2">
+          <div className="w-16 h-16 mx-auto relative mb-2 flex-shrink-0">
             <Image
               src="/images/logo.png"
               alt="Life Care Clinic Logo"
-              fill
-              sizes="64px"
-              className="object-contain"
+              width={64}
+              height={64}
+              className="object-contain mx-auto"
             />
           </div>
           <span className="text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 rounded-full inline-block">
