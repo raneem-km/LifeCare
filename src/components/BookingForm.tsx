@@ -61,21 +61,27 @@ export default function BookingForm() {
         return;
       }
     }
-    if (step === 2 && (!doctor || !mode || !location || !reason)) {
-      alert("Please select doctor, mode, location, and reason for visit.");
+    if (step === 2 && (!doctor || !mode || !location)) {
+      alert("Please select doctor, consultation mode, and clinic location.");
       return;
     }
     if (step === 3 && (!date || !time)) {
       alert("Please select appointment date and preferred time slot.");
       return;
     }
-    setStep((prev) => prev + 1);
+    setStep((prev) => Math.min(4, prev + 1));
   };
 
-  const prevStep = () => setStep((prev) => prev - 1);
+  const prevStep = () => setStep((prev) => Math.max(1, prev - 1));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Prevent submission if not on step 4
+    if (step < 4) {
+      nextStep();
+      return;
+    }
 
     if (phone.length !== 10) {
       setPhoneError("Mobile number must be exactly 10 digits.");
@@ -83,8 +89,13 @@ export default function BookingForm() {
       return;
     }
 
-    if (email.trim() && emailError) {
-      setStep(1);
+    if (!reason) {
+      alert("Please select what kind of care you need (specialty category).");
+      return;
+    }
+
+    if (!symptoms.trim()) {
+      alert("Please describe your specific issue/symptoms.");
       return;
     }
 
@@ -95,7 +106,7 @@ export default function BookingForm() {
       phone: phone,
       email: email.trim() || undefined,
       reason: reason,
-      symptoms: symptoms.trim() || undefined,
+      symptoms: symptoms.trim(),
       doctor: doctor,
       mode: mode,
       location: location,
@@ -292,29 +303,6 @@ export default function BookingForm() {
                 <option value="Karaparambu Branch">Karaparambu Branch</option>
               </select>
             </div>
-
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
-                <span>🩺</span> Primary Specialty / Category *
-              </label>
-              <select
-                required
-                value={reason}
-                onChange={(e) => setReason(e.target.value)}
-                className="w-full h-12 rounded-xl border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary px-4 bg-white text-slate-800 text-sm font-medium outline-none"
-              >
-                <option value="">Select specialty category</option>
-                <option value="Respiratory Diseases">Respiratory Diseases</option>
-                <option value="Digestive System Diseases">Digestive System Diseases</option>
-                <option value="Fertility Care">Fertility Care</option>
-                <option value="Urinary Tract Care">Urinary Tract Care</option>
-                <option value="Children's Diseases">Children's Diseases</option>
-                <option value="Youth Care">Youth Care</option>
-                <option value="Skin Disorders">Skin Disorders</option>
-                <option value="Lifestyle Diseases">Lifestyle Diseases</option>
-                <option value="Mental Health Issues">Mental Health Issues</option>
-              </select>
-            </div>
           </div>
         )}
 
@@ -367,7 +355,7 @@ export default function BookingForm() {
               {/* Broad Category Dropdown */}
               <div>
                 <label htmlFor="category" className="block text-sm font-semibold text-gray-700 mb-1">
-                  What kind of care do you need?
+                  What kind of care do you need? *
                 </label>
                 <select 
                   id="category"
@@ -394,7 +382,7 @@ export default function BookingForm() {
               {/* Custom Typed Issue (Text Area) */}
               <div>
                 <label htmlFor="symptoms" className="block text-sm font-semibold text-gray-700 mb-1">
-                  Please describe your specific issue <span className="text-red-500">*</span>
+                  Please describe your specific issue / symptoms <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   id="symptoms"
