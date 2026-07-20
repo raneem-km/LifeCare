@@ -18,7 +18,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-slate-50 border-t border-slate-200 full-width">
+    <footer className="bg-slate-50 border-t border-slate-200 full-width print:hidden">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-12 max-w-7xl mx-auto">
         <div className="space-y-4">
           <div className="flex items-center gap-3">

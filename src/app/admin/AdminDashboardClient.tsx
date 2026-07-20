@@ -388,30 +388,30 @@ export default function AdminDashboardClient({
       </div>
 
       {/* Printable Header */}
-      <div className="hidden print:block mb-6 text-center">
-        <h1 className="text-2xl font-bold text-slate-900">Life Care Homeopathic Clinic</h1>
-        <p className="text-sm text-slate-600">Patient Appointment Schedule — Printed on {new Date().toLocaleDateString()}</p>
+      <div className="hidden print:block mb-6 text-center space-y-1">
+        <h2 className="text-2xl font-bold text-slate-900">Life Care Homeopathic Clinic</h2>
+        <p className="text-sm font-medium text-slate-600">Patient Appointment Schedule — Printed on {new Date().toLocaleDateString()}</p>
       </div>
 
       {/* Tab 1: Bookings Table */}
       {activeTab === "bookings" && (
-        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden print:shadow-none print:border-none">
+        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden print:shadow-none print:border-none print:w-full print:block print:static print:p-0 print:m-0">
           <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center print:hidden">
             <h2 className="font-bold text-secondary text-lg">Patient Appointment Bookings ({filteredBookings.length})</h2>
             <span className="text-xs text-slate-400 font-medium">Sorted by newest first</span>
           </div>
 
           {filteredBookings.length === 0 ? (
-            <div className="p-12 text-center text-slate-400 space-y-3">
+            <div className="p-12 text-center text-slate-400 space-y-3 print:hidden">
               <span className="material-symbols-outlined text-5xl">event_busy</span>
               <p className="font-medium text-base">No matching appointment bookings found.</p>
               <p className="text-xs">Adjust your search term or date/doctor dropdown filters.</p>
             </div>
           ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full text-left border-collapse">
+            <div className="overflow-x-auto print:overflow-visible print:w-full">
+              <table className="w-full text-left border-collapse print:w-full">
                 <thead>
-                  <tr className="bg-slate-50 border-b border-slate-100 text-xs uppercase font-bold text-slate-400 tracking-wider">
+                  <tr className="bg-slate-50 border-b border-slate-100 text-xs uppercase font-bold text-slate-400 tracking-wider print:bg-white print:border-b-2 print:border-slate-300 print:text-slate-800">
                     <th className="py-4 px-5">Patient Name</th>
                     <th className="py-4 px-5">Contact</th>
                     <th className="py-4 px-5">Doctor</th>
@@ -421,42 +421,42 @@ export default function AdminDashboardClient({
                     <th className="py-4 px-5 text-right print:hidden">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 text-sm">
+                <tbody className="divide-y divide-slate-100 text-sm print:divide-slate-200">
                   {filteredBookings.map((b) => (
-                    <tr key={b.id} className="hover:bg-slate-50/60 transition-colors">
-                      <td className="py-4 px-5 font-bold text-secondary">
+                    <tr key={b.id} className="hover:bg-slate-50/60 transition-colors print:hover:bg-transparent">
+                      <td className="py-4 px-5 font-bold text-secondary print:text-slate-900">
                         {b.firstName} {b.lastName || ""}
                       </td>
-                      <td className="py-4 px-5 font-medium text-slate-600">
-                        <a href={`tel:${b.phone}`} className="hover:text-primary transition-colors flex items-center gap-1 text-xs">
-                          <span className="material-symbols-outlined text-sm">call</span>
+                      <td className="py-4 px-5 font-medium text-slate-600 print:text-slate-900">
+                        <span className="flex items-center gap-1 text-xs">
+                          <span className="material-symbols-outlined text-sm print:hidden">call</span>
                           {b.phone}
-                        </a>
+                        </span>
                       </td>
                       <td className="py-4 px-5">
-                        <span className="inline-block px-2.5 py-1 rounded-full bg-secondary/10 text-secondary text-[11px] font-semibold">
+                        <span className="inline-block px-2.5 py-1 rounded-full bg-secondary/10 text-secondary text-[11px] font-semibold print:bg-transparent print:p-0 print:text-slate-900 print:font-medium">
                           {b.doctor || "General Consultation"}
                         </span>
                       </td>
                       {/* Cleaned Text Display without "Reason: " string */}
-                      <td className="py-4 px-5 text-slate-600 max-w-xs">
-                        <p className="font-semibold text-xs text-slate-800">{cleanReasonText(b.reason)}</p>
+                      <td className="py-4 px-5 text-slate-600 max-w-xs print:max-w-none">
+                        <p className="font-semibold text-xs text-slate-800 print:text-slate-900">{cleanReasonText(b.reason)}</p>
                         {b.symptoms && (
-                          <p className="text-xs text-slate-500 truncate max-w-[200px] mt-0.5" title={b.symptoms}>
+                          <p className="text-xs text-slate-500 truncate max-w-[200px] mt-0.5 print:text-slate-700 print:whitespace-normal print:max-w-none" title={b.symptoms}>
                             {b.symptoms}
                           </p>
                         )}
                       </td>
-                      <td className="py-4 px-5 font-semibold text-slate-700 text-xs">
+                      <td className="py-4 px-5 font-semibold text-slate-700 text-xs print:text-slate-900">
                         {b.date}
                       </td>
-                      {/* Status Dropdown Selector */}
+                      {/* Status Dropdown Selector & Print Badge */}
                       <td className="py-4 px-5">
                         <select
                           disabled={loadingId === b.id}
                           value={b.status || "Pending"}
                           onChange={(e) => handleStatusChange(b.id, e.target.value)}
-                          className={`px-2.5 py-1 rounded-full text-xs font-bold border-none outline-none cursor-pointer ${
+                          className={`print:hidden px-2.5 py-1 rounded-full text-xs font-bold border-none outline-none cursor-pointer ${
                             (b.status || "Pending") === "Confirmed"
                               ? "bg-blue-100 text-blue-700"
                               : (b.status || "Pending") === "Completed"
@@ -471,6 +471,17 @@ export default function AdminDashboardClient({
                           <option value="Completed">Completed</option>
                           <option value="Cancelled">Cancelled</option>
                         </select>
+                        <span className={`hidden print:inline-block font-bold text-xs ${
+                          (b.status || "Pending") === "Confirmed"
+                            ? "text-blue-800"
+                            : (b.status || "Pending") === "Completed"
+                            ? "text-emerald-800"
+                            : (b.status || "Pending") === "Cancelled"
+                            ? "text-rose-800"
+                            : "text-amber-800"
+                        }`}>
+                          {b.status || "Pending"}
+                        </span>
                       </td>
                       {/* Action Buttons: View Details Modal & Soft Delete */}
                       <td className="py-4 px-5 text-right print:hidden">
@@ -499,9 +510,9 @@ export default function AdminDashboardClient({
         </div>
       )}
 
-      {/* Tab 2: Reviews Table */}
+      {/* Tab 2: Reviews Table (Hidden on print) */}
       {activeTab === "reviews" && (
-        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden">
+        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden print:hidden">
           <div className="px-6 py-4 border-b border-slate-100 bg-slate-50/50 flex justify-between items-center">
             <h2 className="font-bold text-secondary text-lg">Patient Reviews & Feedback</h2>
             <span className="text-xs text-slate-400 font-medium">Sorted by newest first</span>

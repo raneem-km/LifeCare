@@ -12,7 +12,7 @@ export default function Navbar() {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full print:hidden">
       {/* Top Info Bar */}
       <div className="w-full bg-secondary text-white py-2 text-xs md:text-sm border-b border-white/10" id="top-bar">
         <div className="max-w-7xl mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-2">
