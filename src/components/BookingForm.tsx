@@ -153,8 +153,8 @@ export default function BookingForm() {
           <span className="material-symbols-outlined text-3xl" style={{ fontVariationSettings: "'FILL' 1" }}>check_circle</span>
         </div>
         <h3 className="text-xl font-extrabold text-secondary">Appointment Requested!</h3>
-        <p className="text-slate-600 text-xs sm:text-sm max-w-xl mx-auto leading-snug">
-          Thank you! Our front desk will contact you shortly via WhatsApp or phone call to confirm your final appointment slot.
+        <p className="text-slate-600 text-xs sm:text-sm max-w-lg mx-auto leading-tight font-medium">
+          Thank you! Our front desk will contact you shortly via WhatsApp or call to confirm your appointment slot.
         </p>
         
         {/* Direct Action Contact Buttons */}
