@@ -156,7 +156,26 @@ export default function BookingForm() {
         <p className="text-slate-600 text-xs sm:text-sm max-w-xl mx-auto leading-snug">
           Thank you! Our front desk will contact you shortly via WhatsApp or phone call to confirm your final appointment slot.
         </p>
-        <Button variant="outline" className="rounded-xl px-6 py-2.5 text-xs font-bold" onClick={resetForm}>
+        
+        {/* Direct Action Contact Buttons */}
+        <div className="pt-2 flex flex-wrap justify-center items-center gap-3 w-full">
+          <a
+            href="tel:+917736643050"
+            className="inline-flex items-center gap-2 bg-primary text-white px-5 py-2.5 rounded-xl text-xs font-bold shadow-md shadow-primary/20 hover:bg-primary/95 hover:scale-105 transition-all"
+          >
+            <span className="material-symbols-outlined text-base">call</span>
+            Call +91 77366 43050
+          </a>
+          <a
+            href="mailto:basilhappyhome@gmail.com"
+            className="inline-flex items-center gap-2 bg-slate-100 text-slate-800 hover:bg-slate-200 px-5 py-2.5 rounded-xl text-xs font-bold transition-all"
+          >
+            <span className="material-symbols-outlined text-base text-primary">mail</span>
+            Email Clinic
+          </a>
+        </div>
+
+        <Button variant="outline" className="rounded-xl px-6 py-2.5 text-xs font-bold mt-2" onClick={resetForm}>
           Book Another Appointment
         </Button>
       </div>
@@ -172,7 +191,7 @@ export default function BookingForm() {
           <div className="flex-1 space-y-1">
             <p className="font-bold text-rose-900 text-sm">Booking Request Failed</p>
             <p className="leading-relaxed">{serverError}</p>
-            <p className="text-[11px] text-rose-600 pt-1">You can also call or WhatsApp us directly at: <a href="tel:+917736643050" className="underline font-bold">+91 77366 43050</a></p>
+            <p className="text-[11px] text-rose-600 pt-1">You can also call us directly at: <a href="tel:+917736643050" className="underline font-bold">+91 77366 43050</a></p>
           </div>
           <button
             type="button"
@@ -183,6 +202,31 @@ export default function BookingForm() {
           </button>
         </div>
       )}
+
+      {/* Quick Click-to-Call & Click-to-Mail Banner */}
+      <div className="p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
+        <span className="font-bold text-slate-700 flex items-center gap-1.5">
+          <span className="material-symbols-outlined text-base text-primary">headset_mic</span>
+          Need Instant Assistance?
+        </span>
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-center">
+          <a
+            href="tel:+917736643050"
+            className="flex items-center gap-1.5 text-slate-800 hover:text-primary transition-colors bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs font-bold text-[11px]"
+          >
+            <span className="material-symbols-outlined text-sm text-primary">call</span>
+            +91 77366 43050
+          </a>
+          <a
+            href="mailto:basilhappyhome@gmail.com"
+            className="flex items-center gap-1.5 text-slate-800 hover:text-primary transition-colors bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs font-bold text-[11px] truncate max-w-[180px] sm:max-w-none"
+          >
+            <span className="material-symbols-outlined text-sm text-primary">mail</span>
+            basilhappyhome@gmail.com
+          </a>
+        </div>
+      </div>
+
       {/* Progress Indicators */}
       <div className="flex justify-between items-center mb-8">
         {[1, 2, 3, 4].map((num) => (
