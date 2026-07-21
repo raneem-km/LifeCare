@@ -209,9 +209,9 @@ export default function BookingForm() {
         {/* STEP 1: Personal Information */}
         {step === 1 && (
           <div className="space-y-4 animate-in fade-in duration-300">
-            <h4 className="text-lg font-bold text-secondary flex items-center gap-2">
+            <h3 className="text-lg font-bold text-secondary flex items-center gap-2">
               <span>Step 1:</span> Personal Information
-            </h4>
+            </h3>
             
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
@@ -277,9 +277,9 @@ export default function BookingForm() {
         {/* STEP 2: Consultation Details */}
         {step === 2 && (
           <div className="space-y-4 animate-in fade-in duration-300">
-            <h4 className="text-lg font-bold text-secondary flex items-center gap-2">
+            <h3 className="text-lg font-bold text-secondary flex items-center gap-2">
               <span>Step 2:</span> Consultation Details
-            </h4>
+            </h3>
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
@@ -334,9 +334,9 @@ export default function BookingForm() {
         {/* STEP 3: Appointment Scheduling */}
         {step === 3 && (
           <div className="space-y-4 animate-in fade-in duration-300">
-            <h4 className="text-lg font-bold text-secondary flex items-center gap-2">
+            <h3 className="text-lg font-bold text-secondary flex items-center gap-2">
               <span>Step 3:</span> Appointment Scheduling
-            </h4>
+            </h3>
 
             <div className="space-y-1.5">
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1">
@@ -372,9 +372,9 @@ export default function BookingForm() {
         {/* STEP 4: Symptoms & Additional Information */}
         {step === 4 && (
           <div className="space-y-4 animate-in fade-in duration-300">
-            <h4 className="text-lg font-bold text-secondary flex items-center gap-2">
+            <h3 className="text-lg font-bold text-secondary flex items-center gap-2">
               <span>Step 4:</span> Reason for Visit / Symptoms
-            </h4>
+            </h3>
 
             <div className="flex flex-col gap-4">
               {/* Broad Category Dropdown */}

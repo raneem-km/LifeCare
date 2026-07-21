@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-import "aos/dist/aos.css";
 
 export default function AosInit() {
   useEffect(() => {
-    import("aos").then((AOS) => {
+    Promise.all([
+      import("aos"),
+      // @ts-ignore
+      import("aos/dist/aos.css")
+    ]).then(([AOS]) => {
       AOS.init({
         duration: 800,
         once: true,

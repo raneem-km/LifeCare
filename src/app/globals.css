@@ -6,7 +6,7 @@
 
 @theme {
   --color-secondary: #0f172a;
-  --color-primary: #00bcd4;
+  --color-primary: #0284c7;
   --color-background: #ffffff;
   --color-outline-variant: #e2e8f0;
   --color-surface-variant: #f1f5f9;
@@ -191,7 +191,7 @@
   --card-foreground: #0f172a;
   --popover: #ffffff;
   --popover-foreground: #0f172a;
-  --primary: #00bcd4;
+  --primary: #0284c7;
   --primary-foreground: #ffffff;
   --secondary: #0f172a;
   --secondary-foreground: #ffffff;

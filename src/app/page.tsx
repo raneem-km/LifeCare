@@ -1,10 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import HeroSection from "@/components/HeroSection";
-import BookingForm from "@/components/BookingForm";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import ServicesSection from "@/components/ServicesSection";
-import Doctors from "@/components/Doctors";
 import { getReviews } from "@/app/actions";
 import {
   Accordion,
@@ -13,6 +10,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import CountUp from "@/components/CountUpWrapper";
+
+const BookingForm = dynamic(() => import("@/components/BookingForm"));
+const TestimonialsSection = dynamic(() => import("@/components/TestimonialsSection"));
+const ServicesSection = dynamic(() => import("@/components/ServicesSection"));
+const Doctors = dynamic(() => import("@/components/Doctors"));
 
 export default async function Home() {
   const dbReviews = await getReviews();
@@ -29,33 +31,33 @@ export default async function Home() {
             
             {/* Stat 1: 15k+ */}
             <div data-aos="fade-up" data-aos-delay="100" className="flex flex-col items-center justify-center text-center">
-              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">
+              <p className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">
                 <CountUp end={15} suffix="k+" duration={1.5} />
-              </h3>
+              </p>
               <p className="text-sm md:text-base font-semibold text-gray-600 uppercase tracking-wider">Patients Treated</p>
             </div>
 
             {/* Stat 2: 15+ */}
             <div data-aos="fade-up" data-aos-delay="200" className="flex flex-col items-center justify-center text-center">
-              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">
+              <p className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">
                 <CountUp end={15} suffix="+" duration={1.7} />
-              </h3>
+              </p>
               <p className="text-sm md:text-base font-semibold text-gray-600 uppercase tracking-wider">Years Exp.</p>
             </div>
 
             {/* Stat 3: 98% */}
             <div data-aos="fade-up" data-aos-delay="300" className="flex flex-col items-center justify-center text-center">
-              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">
+              <p className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">
                 <CountUp end={98} suffix="%" duration={2.0} />
-              </h3>
+              </p>
               <p className="text-sm md:text-base font-semibold text-gray-600 uppercase tracking-wider">Satisfaction</p>
             </div>
 
             {/* Stat 4: 24/7 */}
             <div data-aos="fade-up" data-aos-delay="400" className="flex flex-col items-center justify-center text-center">
-              <h3 className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">
+              <p className="text-4xl md:text-5xl font-extrabold text-green-700 mb-2">
                 <CountUp end={24} suffix="/7" duration={1.2} />
-              </h3>
+              </p>
               <p className="text-sm md:text-base font-semibold text-gray-600 uppercase tracking-wider">Support</p>
             </div>
 

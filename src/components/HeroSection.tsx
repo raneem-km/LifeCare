@@ -43,12 +43,7 @@ export default function HeroSection() {
             </div>
             <span className="font-label-md text-secondary font-bold ml-1.5">5.0 (980 Reviews)</span>
           </div>
-          <h1 
-            data-aos="fade-up" 
-            data-aos-duration="1200" 
-            data-aos-easing="ease-out-cubic"
-            className="font-display-lg text-4xl md:text-5xl lg:text-6xl text-secondary leading-[1.1] tracking-tight font-extrabold"
-          >
+          <h1 className="font-display-lg text-4xl md:text-5xl lg:text-6xl text-secondary leading-[1.1] tracking-tight font-extrabold">
             Trusted <span className="text-primary">Homeopathic Clinic</span> 
             <br className="hidden md:block" /> in Malappuram
           </h1>
