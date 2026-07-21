@@ -35,12 +35,7 @@ export default function RootLayout({
         <link rel="icon" type="image/png" href="/images/logo.png" />
         <link rel="shortcut icon" href="/images/logo.png" />
         <link rel="apple-touch-icon" href="/images/logo.png" />
-        {/* Async non-render-blocking Google Font loading pattern */}
-        <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" />
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" media="print" onLoad={(e) => { (e.target as HTMLLinkElement).media = 'all'; }} />
-        <noscript>
-          <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
-        </noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
       </head>
       {/* We apply the optimized Inter font directly to the body */}
       <body className={`${inter.className} bg-background text-on-surface antialiased`}>
