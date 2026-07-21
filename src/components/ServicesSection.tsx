@@ -232,9 +232,10 @@ export default function ServicesSection() {
               key={service.id}
               data-aos="fade-up"
               data-aos-delay={index * 100}
-              className="bg-surface-container-lowest rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start overflow-hidden"
+              onClick={() => setActiveService(service)}
+              className="bg-surface-container-lowest rounded-2xl shadow-soft border border-surface-variant/30 hover:border-secondary/50 transition-all group shadow-hover flex flex-col items-start overflow-hidden cursor-pointer"
             >
-              <div className="relative w-full h-48 bg-slate-100">
+              <div className="relative w-full h-48 bg-slate-100 overflow-hidden cursor-pointer">
                 <Image 
                   src={service.image} 
                   alt={service.title} 
@@ -242,12 +243,21 @@ export default function ServicesSection() {
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                   className="object-cover group-hover:scale-105 transition-transform duration-500" 
                 />
+                <div className="absolute inset-0 bg-slate-900/0 group-hover:bg-slate-900/10 transition-colors flex items-center justify-center">
+                  <span className="bg-white/90 backdrop-blur-md text-secondary font-bold text-xs px-3 py-1.5 rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-all transform translate-y-2 group-hover:translate-y-0 flex items-center gap-1">
+                    <span className="material-symbols-outlined text-sm text-primary">visibility</span> View Details
+                  </span>
+                </div>
               </div>
               <div className="p-8 flex flex-col items-start flex-grow w-full">
-                <h3 className="text-headline-sm font-bold text-primary mb-3">{service.title}</h3>
+                <h3 className="text-headline-sm font-bold text-primary mb-3 group-hover:text-primary/90 transition-colors">{service.title}</h3>
                 <p className="text-on-surface-variant mb-6 flex-grow">{service.shortDesc}</p>
                 <button
-                  onClick={() => setActiveService(service)}
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setActiveService(service);
+                  }}
                   className="inline-flex items-center gap-1 group-hover:gap-2 p-0 text-secondary font-bold transition-all cursor-pointer bg-transparent border-none outline-none"
                 >
                   Learn more <span className="material-symbols-outlined text-sm">arrow_forward</span>
