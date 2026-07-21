@@ -69,7 +69,8 @@ export default function Navbar() {
 
           {/* Right Action & Mobile Toggle */}
           <div className="flex items-center gap-4">
-            <a href="tel:+917736643050" className="hidden sm:inline-flex bg-secondary text-white px-6 py-3 rounded-xl font-semibold hover:bg-secondary/90 hover:scale-95 transition-all">
+            <a href="tel:+917736643050" className="hidden sm:inline-flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-bold hover:bg-primary/95 shadow-md shadow-primary/25 hover:shadow-lg hover:shadow-primary/35 hover:scale-105 transition-all duration-200">
+              <span className="material-symbols-outlined text-lg">call</span>
               Book a Call
             </a>
             
@@ -120,8 +121,9 @@ export default function Navbar() {
             <a
               onClick={() => setIsMobileMenuOpen(false)}
               href="tel:+917736643050"
-              className="sm:hidden bg-secondary text-white text-center py-3.5 rounded-xl font-bold text-base hover:scale-95 transition-transform duration-200"
+              className="sm:hidden bg-primary text-white text-center py-3.5 rounded-xl font-bold text-base shadow-md shadow-primary/25 hover:bg-primary/95 flex items-center justify-center gap-2 hover:scale-[1.02] transition-all duration-200"
             >
+              <span className="material-symbols-outlined text-lg">call</span>
               Book a Call
             </a>
           </nav>

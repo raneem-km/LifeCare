@@ -51,7 +51,8 @@ export default function HeroSection() {
             Life Care Homeopathic Clinic in JSS Shopping Mall, Manjeri, Kerala provides 15+ years of trusted homeopathic treatment for migraine, piles, women's health, and child immunity. Online consultations available across Kerala.
           </p>
           <div className="flex flex-wrap gap-4 items-center pt-4">
-            <Link className="bg-secondary text-white px-8 py-4 rounded-xl font-semibold hover:bg-secondary/90 hover:shadow-lg hover:scale-[1.02] transition-all duration-200" href="#booking">
+            <Link className="bg-primary text-white px-8 py-4 rounded-xl font-bold shadow-lg shadow-primary/25 hover:bg-primary/95 hover:shadow-xl hover:shadow-primary/35 hover:scale-105 transition-all duration-200 inline-flex items-center gap-2.5" href="#booking">
+              <span className="material-symbols-outlined text-xl">calendar_month</span>
               Book Homeopathy Consultation
             </Link>
             <Link href="#doctors" className="flex items-center gap-2 font-semibold text-secondary hover:text-primary transition-colors py-2 px-4 rounded-xl hover:bg-slate-50">
