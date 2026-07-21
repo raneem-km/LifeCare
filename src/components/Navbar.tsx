@@ -37,15 +37,15 @@ export default function Navbar() {
       <header className="w-full relative z-50 bg-white/95 glass-nav border-b border-outline-variant/30 shadow-sm transition-all duration-300">
         <div className="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop h-20 max-w-7xl mx-auto">
           {/* Brand/Logo */}
-          <Link href="/" className="flex items-center gap-3 hover:opacity-95 transition-opacity group">
-            <div className="w-12 h-12 rounded-xl overflow-hidden shadow-sm border border-slate-100 bg-white flex items-center justify-center relative">
-              <Image src="/images/logo.png" alt="Life Care Logo" fill sizes="48px" className="object-contain" priority />
+          <Link href="/" className="flex items-center gap-3.5 hover:opacity-95 transition-opacity group">
+            <div className="w-[52px] h-[52px] rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 bg-white flex items-center justify-center relative flex-shrink-0 group-hover:shadow-md transition-shadow">
+              <Image src="/images/logo.png" alt="Life Care Logo" fill sizes="52px" className="object-contain p-1" priority />
             </div>
-            <div className="flex flex-col">
-              <span className="font-display-lg text-lg font-extrabold text-secondary tracking-tight leading-tight">
+            <div className="flex flex-col justify-center">
+              <span className="font-display-lg text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-none mb-1">
                 Life Care
               </span>
-              <span className="text-xs text-slate-500 font-medium leading-none">
+              <span className="text-[11px] md:text-xs text-primary font-bold uppercase tracking-wider leading-none">
                 Homeopathic Clinic
               </span>
             </div>

@@ -21,15 +21,15 @@ export default function Footer() {
     <footer className="bg-slate-50 border-t border-slate-200 full-width print:hidden">
       <div className="grid grid-cols-1 md:grid-cols-4 gap-gutter px-margin-mobile md:px-margin-desktop py-12 max-w-7xl mx-auto">
         <div className="space-y-4">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl overflow-hidden shadow-sm border border-slate-200 bg-white flex items-center justify-center relative">
-              <Image src="/images/logo.png" alt="Life Care Logo" fill className="object-contain" />
+          <div className="flex items-center gap-3.5">
+            <div className="w-[52px] h-[52px] rounded-2xl overflow-hidden shadow-sm border border-slate-200/80 bg-white flex items-center justify-center relative flex-shrink-0">
+              <Image src="/images/logo.png" alt="Life Care Logo" fill sizes="52px" className="object-contain p-1" />
             </div>
-            <div className="flex flex-col">
-              <span className="font-display-lg text-lg font-extrabold text-secondary tracking-tight leading-tight">
+            <div className="flex flex-col justify-center">
+              <span className="font-display-lg text-xl md:text-2xl font-black text-slate-900 tracking-tight leading-none mb-1">
                 Life Care
               </span>
-              <span className="text-xs text-slate-500 font-medium leading-none">
+              <span className="text-[11px] md:text-xs text-primary font-bold uppercase tracking-wider leading-none">
                 Homeopathic Clinic
               </span>
             </div>
