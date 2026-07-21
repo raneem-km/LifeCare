@@ -228,18 +228,28 @@ export default async function Home() {
                 Take the first step towards recovery and natural well-being. Fill out the form or call our clinic desk directly to book your slot.
               </p>
               <div className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                    <span className="material-symbols-outlined">call</span>
+                <a 
+                  href="tel:+917736643050" 
+                  className="flex items-center gap-4 group p-2.5 rounded-2xl hover:bg-white hover:shadow-md transition-all duration-200 cursor-pointer w-fit"
+                >
+                  <div className="w-11 h-11 rounded-full bg-primary/10 group-hover:bg-primary group-hover:text-white transition-all flex items-center justify-center text-primary shadow-xs">
+                    <span className="material-symbols-outlined text-xl">call</span>
                   </div>
-                  <span className="font-bold text-secondary">+91 77366 43050</span>
-                </div>
-                <div className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
-                    <span className="material-symbols-outlined">mail</span>
+                  <span className="font-bold text-secondary text-base group-hover:text-primary transition-colors">
+                    +91 77366 43050
+                  </span>
+                </a>
+                <a 
+                  href="mailto:basilhappyhome@gmail.com" 
+                  className="flex items-center gap-4 group p-2.5 rounded-2xl hover:bg-white hover:shadow-md transition-all duration-200 cursor-pointer w-fit"
+                >
+                  <div className="w-11 h-11 rounded-full bg-primary/10 group-hover:bg-primary group-hover:text-white transition-all flex items-center justify-center text-primary shadow-xs">
+                    <span className="material-symbols-outlined text-xl">mail</span>
                   </div>
-                  <span className="font-bold text-secondary">basilhappyhome@gmail.com</span>
-                </div>
+                  <span className="font-bold text-secondary text-base group-hover:text-primary transition-colors">
+                    basilhappyhome@gmail.com
+                  </span>
+                </a>
               </div>
             </div>
             <div className="w-full md:w-1/2">

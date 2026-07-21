@@ -203,30 +203,6 @@ export default function BookingForm() {
         </div>
       )}
 
-      {/* Quick Click-to-Call & Click-to-Mail Banner */}
-      <div className="p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-3 text-xs">
-        <span className="font-bold text-slate-700 flex items-center gap-1.5">
-          <span className="material-symbols-outlined text-base text-primary">headset_mic</span>
-          Need Instant Assistance?
-        </span>
-        <div className="flex items-center gap-2 w-full sm:w-auto justify-center">
-          <a
-            href="tel:+917736643050"
-            className="flex items-center gap-1.5 text-slate-800 hover:text-primary transition-colors bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs font-bold text-[11px]"
-          >
-            <span className="material-symbols-outlined text-sm text-primary">call</span>
-            +91 77366 43050
-          </a>
-          <a
-            href="mailto:basilhappyhome@gmail.com"
-            className="flex items-center gap-1.5 text-slate-800 hover:text-primary transition-colors bg-white px-3 py-1.5 rounded-xl border border-slate-200 shadow-2xs font-bold text-[11px] truncate max-w-[180px] sm:max-w-none"
-          >
-            <span className="material-symbols-outlined text-sm text-primary">mail</span>
-            basilhappyhome@gmail.com
-          </a>
-        </div>
-      </div>
-
       {/* Progress Indicators */}
       <div className="flex justify-between items-center mb-8">
         {[1, 2, 3, 4].map((num) => (
